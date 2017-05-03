@@ -21,6 +21,7 @@ Vue.component('yjtextarea-component', {
 		'<div :class="params.css">'+
 		'	<textarea v-on:focus="focus" v-on:blur="blur" v-model="message" :placeholder="params.placeholder"></textarea>'+
 		'	<p class="limit">{{currentLength}}/{{maxLength}}</p>'+
+    	'	<img src="img/deleteIcon-gray.png">'+
 		'</div>',
 	data: function() {
 		return {

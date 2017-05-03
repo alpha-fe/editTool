@@ -1,7 +1,4 @@
 @charset "UTF-8";
-body {
-  background: red; }
-
 /*reset*/
 body, h1, h2, h3, h4, h5, p, dl, dd, ul, ol {
   margin: 0;
@@ -552,7 +549,8 @@ input:focus {
         border: 1px solid #fff;
         box-sizing: border-box;
         line-height: 29px;
-        border-radius: 2px; }
+        border-radius: 2px;
+        text-align: center; }
       .content .left .head-img input {
         opacity: 0;
         position: absolute;
@@ -809,7 +807,7 @@ input:focus {
     .journey > .spend .limit_max {
       top: 6px;
       right: 4px; }
-  .journey > .content-text {
+  .journey .content-text {
     height: 194px;
     border: 1px solid #999;
     margin-top: 10px;
@@ -818,27 +816,35 @@ input:focus {
     position: relative;
     color: #333;
     font-size: 14px; }
-    .journey > .content-text > textarea {
+    .journey .content-text > textarea {
       border: none;
       width: 100%;
       height: 100%; }
-    .journey > .content-text .limit {
+    .journey .content-text .limit {
       position: absolute;
       top: inherit;
       right: 7px;
       font-size: 12px;
       color: #FD5554; }
-  .journey > .content-image {
+    .journey .content-text img {
+      position: absolute;
+      width: 11px;
+      height: 12px;
+      top: 4px;
+      right: 4px; }
+      .journey .content-text img:hover {
+        cursor: pointer; }
+  .journey .content-image {
     border: 1px solid #999;
-    box-shadow: 0 0 10px #CCC, 0 0px 10px #ccc;
+    border-radius: 2px;
     margin-top: 10px;
     padding: 10px; }
-    .journey > .content-image .image {
+    .journey .content-image .image {
       width: 180px;
       height: 160px;
       background: #eee;
       position: relative; }
-    .journey > .content-image .rotate {
+    .journey .content-image .rotate {
       position: absolute;
       top: 0;
       right: 0;
@@ -846,7 +852,7 @@ input:focus {
       height: 30px;
       background: #000;
       opacity: 0.5; }
-    .journey > .content-image .rotate-text {
+    .journey .content-image .rotate-text {
       position: absolute;
       top: 0;
       left: 0;
@@ -856,32 +862,40 @@ input:focus {
       text-align: right;
       padding-right: 4px;
       box-sizing: border-box; }
-      .journey > .content-image .rotate-text img {
+      .journey .content-image .rotate-text img {
         width: 18px;
         height: 18px;
         vertical-align: middle; }
-      .journey > .content-image .rotate-text span {
+      .journey .content-image .rotate-text span {
         vertical-align: middle;
         margin-left: 5px;
         height: 30px;
         display: inline-block;
         line-height: 30px; }
-    .journey > .content-image img {
+    .journey .content-image img {
       width: 100%; }
-    .journey > .content-image .describe {
+    .journey .content-image .describe {
       width: 460px;
       position: relative;
       margin-left: 10px; }
-      .journey > .content-image .describe textarea {
+      .journey .content-image .describe textarea {
         height: 150px;
         border: none; }
-      .journey > .content-image .describe .limit {
+      .journey .content-image .describe .limit {
         position: absolute;
         top: 152px;
         right: 0px;
         font-size: 12px;
         color: #999; }
-    .journey > .content-image textarea {
+      .journey .content-image .describe img {
+        position: absolute;
+        width: 11px;
+        height: 12px;
+        top: -4px;
+        right: -4px; }
+        .journey .content-image .describe img:hover {
+          cursor: pointer; }
+    .journey .content-image textarea {
       width: 100%; }
 
 .operate {
@@ -891,7 +905,8 @@ input:focus {
   padding: 10px;
   box-sizing: border-box;
   color: #3F3F3F;
-  font-size: 15px; }
+  font-size: 15px;
+  border-radius: 2px; }
   .operate a {
     width: 126px;
     height: 126px;
@@ -899,7 +914,8 @@ input:focus {
     box-sizing: border-box;
     margin-right: 15px;
     color: #1A8CED;
-    position: relative; }
+    position: relative;
+    text-align: center; }
     .operate a img {
       width: 50px;
       margin: 28px 38px 6px; }
@@ -975,9 +991,7 @@ input:focus {
       .tags-popup .popup-body .selected-tags > span {
         float: left;
         border: 1px solid #1A8CED;
-        height: 25px;
-        line-height: 25px;
-        padding: 0 19px 0 8px;
+        padding: 3px 22px 3px 10px;
         box-sizing: border-box;
         margin-right: 10px;
         border-radius: 2px;
@@ -988,15 +1002,20 @@ input:focus {
         .tags-popup .popup-body .selected-tags > span a {
           color: #fff;
           position: absolute;
-          font-size: 23px;
-          top: -1px;
-          right: 1px; }
+          font-size: 21px;
+          top: -2px;
+          right: 3px;
+          font-family: -webkit-pictograph; }
     .tags-popup .popup-body .common-tag {
       font-size: 20px;
       text-align: left;
       margin: 20px 0 10px 0; }
+    .tags-popup .popup-body .tagbox {
+      height: 240px;
+      overflow-y: scroll; }
     .tags-popup .popup-body .tag {
-      margin-bottom: 12px; }
+      margin-bottom: 12px;
+      position: relative; }
     .tags-popup .popup-body .tag.more {
       height: 56px; }
     .tags-popup .popup-body .tag-type {
@@ -1005,22 +1024,24 @@ input:focus {
       width: 56px;
       line-height: 30px;
       text-align: center;
-      border-radius: 2px; }
+      border-radius: 2px;
+      position: absolute;
+      top: 50%;
+      margin-top: -15px; }
     .tags-popup .popup-body .tag-type.more {
       margin-top: 15px; }
     .tags-popup .popup-body .tag-name {
-      width: 472px; }
+      width: 472px;
+      margin-left: 62px; }
     .tags-popup .popup-body .tag-name > span {
       float: left;
       color: #1A8CED;
       border: 1px solid #1A8CED;
-      height: 25px;
-      line-height: 25px;
-      padding: 0 8px;
+      padding: 3px 8px;
       box-sizing: border-box;
       margin-left: 10px;
       border-radius: 2px;
-      margin-top: 4px;
+      margin-bottom: 6px;
       font-size: 14px; }
       .tags-popup .popup-body .tag-name > span:hover {
         cursor: pointer; }
@@ -1051,4 +1072,4 @@ input:focus {
     border-radius: 2px;
     text-indent: 10px; }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=main.css.map */

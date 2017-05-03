@@ -1,0 +1,453 @@
+@charset "UTF-8";
+/*reset*/
+body, h1, h2, h3, h4, h5, p, dl, dd, ul, ol {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    overflow-y: scroll;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+html * {
+    outline: 0;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+em {
+    font-style: normal;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    border: none;
+    vertical-align: top;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+input, textarea {
+    outline: none;
+}
+
+textarea {
+    resize: none;
+    overflow: auto;
+}
+
+body {
+    font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif,"宋体";
+}
+
+/*public*/
+.clearfix {
+    zoom: 1;
+}
+
+.clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+a:link, a:visited, a:hover {
+    text-decoration: none;
+}
+
+/*img-circle*/
+.img-responsive {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: none;
+    vertical-align: middle;
+}
+
+/*header*/
+.header {
+    margin: 10px auto;
+}
+.header .search-box {
+    width: 562px;
+    height: 81px;
+    margin: 0 auto;
+    margin-right: 20px;
+}
+.header .search-box .search-main {
+    color: #333333;
+}
+.header .search-box .search-main .search-input-btn {
+    height: 50px;
+}
+.header .search-box .search-main .search-input-btn input::-webkit-input-placeholder {
+    font-weight: 200;
+}
+.header .search-box .search-main .search-input-btn input:-moz-placeholder {
+    font-weight: 200;
+}
+.header .search-box .search-main .search-input-btn input::-moz-placeholder {
+    font-weight: 200;
+}
+.header .search-box .search-main .search-input-btn input:-ms-input-placeholder {
+    font-weight: 200;
+}
+.header .search-box .search-main .search-input-btn .search-input {
+    width: 432px;
+    height: 24px;
+    padding: 12px 14px;
+    border: solid 1px #1a8ced;
+    border-radius: 4px 0 0 4px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.header .search-box .search-main .search-input-btn .search-btn {
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 0 4px 4px 0;
+    background: #1a8ced;
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    cursor: hand;
+}
+.header .search-box .search-main .tags-box {
+    height: 25px;
+    line-height: 25px;
+    margin-top: 6px;
+}
+.header .search-box .search-main .tags-box .tags-title {
+    width: 92px;
+    margin-right: 7px;
+    font-size: 18px;
+}
+.header .search-box .search-main .tags-box .tags-main .tag-item {
+    width: 49px;
+    margin-right: 20px;
+    border-radius: 2px;
+    background: #1a8ced;
+    font-size: 12px;
+    text-align: center;
+}
+.header .search-box .search-main .tags-box .tags-main .tag-item a {
+    color: #fff;
+}
+.header .search-box .search-main .tags-box .tags-main .tag-item:last-child {
+    margin-right: 0;
+}
+.header .publish, .header .opinion {
+    width: 192px;
+    height: 76px;
+    line-height: 76px;
+    border-radius: 2px;
+    text-align: center;
+}
+.header .publish a, .header .opinion a {
+    display: block;
+    width: 188px;
+    height: 72px;
+    margin: 2px;
+    font-size: 22px;
+}
+.header .publish a span, .header .opinion a span {
+    margin-right: 64px;
+}
+.header .publish {
+    margin-right: 16px;
+    border: solid 2px #1a8ced;
+}
+.header .publish a {
+    background-size: 100%;
+    color: #1a8ced;
+}
+.header .opinion {
+    border: solid 2px #F58833;
+}
+.header .opinion a {
+    background-size: 100%;
+    color: #F58833;
+}
+
+/*footer*/
+.footer {
+    width: 990px;
+    margin: 10px auto 0 auto;
+    padding: 7px 0 10px 0;
+    border-top: 3px solid #3b5998;
+    text-align: center;
+    color: #7c7c7c;
+    font-size: 12px;
+}
+.footer p {
+    line-height: 24px;
+    margin: 0;
+    padding: 0;
+}
+.footer p a {
+    display: inline-block;
+    margin: 0 9px;
+    color: #7c7c7c;
+}
+.footer p a:visited {
+    color: #7c7c7c;
+    text-decoration: none;
+}
+.footer p a:hover {
+    color: #d60000;
+    text-decoration: none;
+}
+.footer p .footios, .footer p .footand, .footer p .footwp, .footer p .footphone, .footer p .footauto {
+    display: inline-block;
+    padding-left: 19px;
+}
+.footer p .footios {
+    background-position: 0 3px;
+}
+.footer p .footand {
+    background-position: 0 -27px;
+}
+.footer p .footwp {
+    background-position: 0 -57px;
+}
+.footer p .footphone {
+    background-position: 0 -87px;
+}
+.footer p .footauto {
+    padding: 0 22px 0 21px;
+    background-position: 0 -117px;
+}
+
+.suspending-btns {
+    position: fixed;
+    bottom: 60px;
+    margin-left: 1000px;
+    width: 50px;
+    border: solid 1px #F58833;
+}
+.suspending-btns .suspending-item {
+    display: block;
+    position: relative;
+    width: 50px;
+    height: 49px;
+    border-bottom: solid 1px #F58833;
+    cursor: pointer;
+}
+.suspending-btns .suspending-item:last-child {
+    border-bottom: 0;
+}
+.suspending-btns .suspending-item:hover {
+    background: #F58833;
+}
+.suspending-btns .go-top {
+    display: none;
+}
+.suspending-btns .go-top.show {
+    display: block;
+}
+.suspending-btns .go-top:before {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 26px;
+    height: 26px;
+    margin-top: -13px;
+    margin-left: -13px;
+    content: '';
+    background-size: 100%;
+}
+.suspending-btns .go-top:hover:before {
+    position: absolute;
+    left: 24px;
+    top: 18px;
+    content: '返回顶部';
+    width: 30px;
+    height: 40px;
+    background: none;
+    font-size: 14px;
+    color: #fff;
+}
+.suspending-btns .go-home:before {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 26px;
+    height: 26px;
+    margin-top: -13px;
+    margin-left: -13px;
+    content: '';
+    background-size: 100%;
+}
+.suspending-btns .go-home:hover:before {
+    position: absolute;
+    left: 24px;
+    top: 18px;
+    content: '返回首页';
+    width: 30px;
+    height: 40px;
+    background: none;
+    font-size: 14px;
+    color: #fff;
+}
+.suspending-btns .go-publish:before {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 26px;
+    height: 30px;
+    margin-top: -15px;
+    margin-left: -13px;
+    content: '';
+    background-size: 100%;
+}
+.suspending-btns .go-publish:hover:before {
+    position: absolute;
+    left: 24px;
+    top: 20px;
+    content: '发表游记';
+    width: 30px;
+    height: 40px;
+    background: none;
+    font-size: 14px;
+    color: #fff;
+}
+.suspending-btns .go-opinion:before {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 36px;
+    height: 36px;
+    margin-top: -18px;
+    margin-left: -18px;
+    content: '';
+    background-size: 100%;
+}
+.suspending-btns .go-opinion:hover:before {
+    position: absolute;
+    left: 29px;
+    top: 22px;
+    content: '意见反馈';
+    width: 30px;
+    height: 40px;
+    background: none;
+    font-size: 14px;
+    color: #fff;
+}
+
+/*公共头部*/
+.head {
+    width: 100%;
+    height: 33px;
+    line-height: 33px;
+    background: #f9f9f9;
+    border-bottom: solid 1px #eee;
+    color: #fff;
+    font-size: 14px;
+}
+.head .container {
+    width: 990px;
+    margin: 0 auto;
+}
+.head .container .head-logo {
+    float: left;
+    width: 236px;
+    height: 33px;
+    background-size: 100%;
+}
+.head .container .login-register {
+    position: relative;
+    float: right;
+    max-width: 300px;
+    line-height: 33px;
+    height: 33px;
+}
+.head .container .login-register li {
+    float: left;
+    color: #aaa;
+}
+.head .container .login-register span {
+    margin-right: 5px;
+}
+.head .container .login-register span, .head .container .login-register a {
+    float: left;
+}
+.head .container .login-register a {
+    display: inline-block;
+    padding-right: 5px;
+    text-align: center;
+    color: #1a8ced;
+}
+.head .container .login-register .username {
+    max-width: 145px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.head .container .login-register .msg {
+    margin-left: 10px;
+    cursor: pointer;
+    cursor: hand;
+}
+.head .container .login-register .msg:hover {
+    background: #fff;
+}
+.head .container .login-register .msg:hover span {
+    color: #f1762c;
+}
+.head .container .login-register .msg span {
+    padding: 0 30px 0 15px;
+    border-left: solid 1px #fff;
+}
+.head .container .login-register .msg .msg-con {
+    position: absolute;
+    left: 0;
+    z-index: 999;
+    width: 272px;
+    padding: 5px 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #fff;
+    border: solid 1px #e7e7e7;
+}
+.head .container .login-register .msg .msg-con li {
+    width: 100%;
+    padding: 0 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #1a8ced;
+}
+.head .container .login-register .msg .msg-con li:hover {
+    background: #f8f8f8;
+}
+.head .container .login-register .msg .msg-con li a {
+    width: initial;
+    color: #1a8ced;
+}
+
+/*# sourceMappingURL=reset.css.map */

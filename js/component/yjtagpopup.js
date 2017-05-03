@@ -24,12 +24,14 @@ Vue.component('yjtapopup-component', {
 		'			<span v-for="(t,index) in selectedTags" class="fl">{{t.text}}<a href="javascript:void(0);" v-on:click="removeTag(index)" class="remove-tag">×</a></span>' +
 		'		</div>' +
 		'		<p class="common-tag">常用标签</p>' +
-		'		<div class="tag clearfix" v-for="(tag,pindex) in tags">' +
-		'			<div class="tag-type fl" @click="processTag(pindex)">{{tag.text}}</div>' +
-		'			<div class="tag-name fl">' +
-		'				<span v-bind:class="{\'selected\':stag.selected}" @click="processTag(pindex,sindex)" v-for="(stag,sindex) in tag.list">{{stag.text}}</span>' +
+		'		<div class="tagbox">'+
+		'			<div class="tag clearfix" v-for="(tag,pindex) in tags">' +
+		'				<div class="tag-type fl" @click="processTag(pindex)">{{tag.text}}</div>' +
+		'				<div class="tag-name fl">' +
+		'					<span v-bind:class="{\'selected\':stag.selected}" @click="processTag(pindex,sindex)" v-for="(stag,sindex) in tag.list">{{stag.text}}</span>' +
+		'				</div>' +
 		'			</div>' +
-		'		</div>' +
+    	'		</div>' +
 		'	</div>' +
 		'	<div class="popup-footer">' +
 		'		<a href="javascript:void(0);" @click="confirmAdd" class="add-btn">确认添加</a>' +
@@ -38,7 +40,8 @@ Vue.component('yjtapopup-component', {
 		'',
 	data: function() {
 		return {
-			tags: [{
+			tags: [
+				{
 					"text": "美食",
 					"code": "007",
 					"list": [{

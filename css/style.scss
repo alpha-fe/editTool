@@ -1,5 +1,8 @@
 @charset "utf-8";
 
+body{
+  background: red;
+}
 /*reset*/
 body,h1,h2,h3,h4,h5,p,dl,dd,ul,ol{
   margin:0;
@@ -1192,7 +1195,6 @@ input:focus{
         margin:20px 0 10px 0;
       }
       .tag{
-        height:32px;
         margin-bottom: 12px;
 
       }
