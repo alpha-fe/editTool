@@ -162,8 +162,9 @@ Vue.component('yjpicmixtool-component', {
 
 			// 保存前的数据顺序
 			window.console.log("保存前:" + JSON.stringify(this.data));
-
-			var tabList = this.data.paragraphList;
+			
+			var saveData = JSON.parse(JSON.stringify(this.data));
+			var tabList = saveData.paragraphList;
 			for(var i = 0; i < tabList.length; i++) {
 				var selector = '.gridly:eq(' + i + ')';
 				// 获得排序后的ele
@@ -175,13 +176,13 @@ Vue.component('yjpicmixtool-component', {
 					var obj = JSON.parse(jsonStr);
 					journeyContent.push(obj);
 				}
-				this.data.paragraphList[i].journeyContent = journeyContent;
+				saveData.paragraphList[i].journeyContent = journeyContent;
 			}
 
 			// 保存后的数据顺序
-			window.console.log("保存后:" + JSON.stringify(this.data));
+			window.console.log("保存后:" + JSON.stringify(saveData));
 			$(this.$el).animate({ width: 'toggle' }, function() {
-				self.$emit('childup', { isCreated: false, data: self.data });
+				self.$emit('childup', { isCreated: false, data: saveData });
 			});
 		},
 		/**
