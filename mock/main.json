@@ -1,0 +1,82 @@
+{
+  "id": "52233",
+  "userId": "33623528",
+  "coverInfo": {
+    "coverUrl": "http://img2.autoimg.cn/travelplat/g11/M07/46/0A/wKgH4VjaESuAYvt5AAEgYzqwtY4422.jpg",
+    "title": "啊啊",
+    "destination": "北京市",
+    "destinationInfo": "39.911013,116.413554"
+  },
+  "paragraphInfo": {
+    "id": "",
+    "dayNum": "",
+    "paragraphList": [
+      {
+        "journeyId": "0",
+        "journeyTitle": "行程1",
+        "address": "长春",
+        "addressInfo": "",
+        "startCost": 500,
+        "endCost": 5000,
+        "startTime": "2017-05-02",
+        "tagdict": [{
+					"text": "本地小吃 ",
+					"code": "0079999000001"
+				}, {
+					"text": "KTV",
+					"code": "0109999000005"
+				}, {
+					"text": "古镇",
+					"code": "0110001000005"
+				}],
+        "journeyContent": [
+          {
+            "id": "0",
+            "imgurl": "http://img2.autoimg.cn/travelplat/g10/M07/42/DC/wKjBzVjaEaiAOJ9rAAChduceFY0757.jpg",
+            "content": "testtest",
+            "type": "img",
+            "width": "750",
+            "height": "500"
+          },
+          {
+            "id": "0",
+            "imgurl": "",
+            "content": "我都放卡是否健康减肥；；李开复；咯十分艰苦拉萨了看；；撒旦；看见了就开了；；看flak了解的时间考虑",
+            "type": "text",
+            "width": "",
+            "height": ""
+          }
+        ]
+      },
+      {
+        "journeyId": "0",
+        "journeyTitle": "行程2",
+        "address": "吉林",
+        "addressInfo": "",
+        "startCost": 500,
+        "endCost": 5000,
+        "startTime": "2017-05-15",
+        "tagdict": [
+        ],
+        "journeyContent": [
+          {
+            "id": "0",
+            "imgurl": "http://img2.autoimg.cn/travelplat/g10/M07/42/DC/wKjBzVjaEaiAOJ9rAAChduceFY0757.jpg",
+            "content": "testtest",
+            "type": "img",
+            "width": "750",
+            "height": "500"
+          },
+          {
+            "id": "0",
+            "imgurl": "",
+            "content": "我都放sddfsfsdfsfsfsddfsdf了；；看flak了解的时间考虑",
+            "type": "text",
+            "width": "",
+            "height": ""
+          }
+        ]
+      }
+    ]
+  }
+}

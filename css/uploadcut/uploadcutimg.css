@@ -1,0 +1,41 @@
+img {
+	max-width: 100%;
+}
+/* 确定，取消 按钮样式表*/
+.form-groups {
+	position: absolute;
+	/*bottom: 30px;*/
+	color: #fff;
+	width: 100%;
+	text-align: right;
+	right: 0;
+	bottom: -50px;
+}
+
+/* 确定，取消 按钮样式表*/
+.form-groups button {
+	background: rgba(255, 255, 255, 0.5);
+	line-height: 30px;
+	padding: 0 20px;
+	margin-left: 10px;
+}
+/* 截图框中间的长宽显示 */
+.crop-size {
+	pointer-events: none;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	font-size: 14px;
+	line-height: 30px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	background-color: rgba(255, 255, 255, 0.5);
+	color: #fff;
+	padding: 0 28px;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.75);
+}
