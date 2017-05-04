@@ -41,14 +41,15 @@ Vue.component('yjpicmixtool-component', {
 		'				</li>' +
 		'			</ul>' +
 		'			<ul>' +
-		'				<a href="javascript:void(0);" @click="addContent" class="fl">' +
+		'				<a href="javascript:void(0);" @click="addContent($event)" class="fl">' +
 		'					<img src="img/addTextIcon.png" alt="">' +
 		'					<span class="text">添加正文</span>' +
 		'				</a>' +
-		'				<a href="javascript:void(0);" @click="addImg"  class="fl">' +
+		'				<a href="javascript:void(0);" @click="addImg($event)"  class="fl">' +
 		'					<img src="img/addImgIcon.png" alt="">' +
 		'					<span class="img-number">0/50</span>' +
 		'					<span class="text">添加图片</span>' +
+		'					<yjupload2-component @childup="uploadimg" ></yjupload2-component>'+
 		'				</a>' +
 		'			</ul>' +
 		'		</div>' +
@@ -219,24 +220,40 @@ Vue.component('yjpicmixtool-component', {
 			// todo:未作做
 		},
 		/**
-		 * 添加图片
+		 * 上传图片
+		 * @param {Object} r
 		 */
-		addImg: function() {
+		uploadimg:function(r){
+//			window.console.log(JSON.stringify(r));
+			if(r.code != 0){
+				alert("上传错误");
+				return;
+			}
+			
 			var img = {
 				"id": "",
-				"imgurl": "http://img2.autoimg.cn/travelplat/g10/M07/42/DC/wKjBzVjaEaiAOJ9rAAChduceFY0757.jpg",
-				"content": "testtest",
+				"imgurl": "",
+				"content": "",
 				"type": "img",
 				"width": "",
 				"height": ""
 			};
+			img.imgurl = r.result;
 			this.data.paragraphList[this.tabSelected].journeyContent.push(img);
 
 			Vue.nextTick(function() {
 				$('.gridly').gridly('layout');
 			})
 
-			console.log('add img');
+//			console.log('add img')
+		},
+		/**
+		 * 添加图片
+		 */
+		addImg: function(event) {
+			var $uploadinput = $(event.target).find('input');
+			$uploadinput.click();
+	
 		},
 		/**
 		 * 删除某个正文或图注
