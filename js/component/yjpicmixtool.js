@@ -49,7 +49,7 @@ Vue.component('yjpicmixtool-component', {
 		'					<img src="img/addImgIcon.png" alt="">' +
 		'					<span class="img-number">0/50</span>' +
 		'					<span class="text">添加图片</span>' +
-		'					<yjupload2-component @childup="uploadimg" ></yjupload2-component>'+
+		'					<yjupload-component @childup="uploadimg" ></yjupload-component>'+
 		'				</a>' +
 		'			</ul>' +
 		'		</div>' +
@@ -251,7 +251,7 @@ Vue.component('yjpicmixtool-component', {
 		 * 添加图片
 		 */
 		addImg: function(event) {
-			var $uploadinput = $(event.target).find('input');
+			var $uploadinput = $(event.target).parents('ul').find('input');
 			$uploadinput.click();
 	
 		},

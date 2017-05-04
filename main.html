@@ -151,8 +151,13 @@
                                 <img src="img/addTextIcon.png" alt="">
                                 <span class="text">添加正文</span>
                             </a>
-                            <upload-auto></upload-auto>
-                            <div class="fl warn">
+                           	<a href="javascript:void(0);"  v-on:click="uploadimg($event)" class="fl">
+								<img src="img/addImgIcon.png" alt="">
+								<span class="img-number">0/50</span>
+								<span  class="text">添加图片</span>	
+								<yjupload-component @childup="uploadedimg" v-bind:index="pindex"></yjupload-component>
+							</a>
+	                            <div class="fl warn">
                                 <p>单个行程最多添加50张图片</p>
                                 图片单张大小不超过20M<br> 支持jpg、png、bmp格式的图片
                                 <br> 图片最小支持：320*800px，最大支持9999*9999px
@@ -219,7 +224,7 @@
 <script type="text/javascript" src="js/popDialog.js"></script>
 <script type="text/javascript" src="js/component/yjselect2.js"></script>
 <script type="text/javascript" src="js/component/yjuploadcut.js"></script>
-<script type="text/javascript" src="js/component/upload.js"></script>
+<script type="text/javascript" src="js/component/yjupload.js"></script>
 <script type="text/javascript" src="js/component/yjdatepicker.js"></script>
 <script type="text/javascript" src="js/component/yjtextarea.js"></script>
 <script type="text/javascript" src="js/component/yjcatalog.js"></script>

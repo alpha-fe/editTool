@@ -84,6 +84,21 @@ var mainVue = new Vue({
             this.yjData.paragraphInfo.paragraphList[index].journeyContent.push(content);
         },
         /**
+         * 上传图片后的回掉
+         * @param {Object} r
+         */
+        uploadedimg:function(r,index){
+        	window.console.log(JSON.stringify(r));
+        	window.console.log(index);
+        },
+        /**
+         * 添加图片
+         */
+        uploadimg:function(event){
+        	var $uploadinput = $(event.target).parents('div.operate').find('a.fl input');
+			$uploadinput.click();
+        },
+        /**
          * 删除正文或图片
          */
         deleteItem:function(pindex,jindex){
