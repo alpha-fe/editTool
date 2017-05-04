@@ -16,7 +16,7 @@ Vue.component('yjcatalog-component', {
 		'	<span class="catalog-text">点击对应行程可快速切换</span>'+
 		'	<ul>'+
 		'		<li v-for="(l,index) in list" >'+
-		'			<a style="text-decoration:none" href="#" v-on:click="greet(index)">{{ index }}/ {{l.journeyTitle}}</a>'+
+		'			<a style="text-decoration:none" :href="\'#\'+index" v-on:click="greet(index)">{{ index }}/ {{l.journeyTitle}}</a>'+
 		'		</li>'+
 		'	</ul>'+
 		'</div>',

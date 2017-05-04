@@ -82,12 +82,13 @@
                     vue:journey
                 -->
                 <!-- start -->
-                <div v-for="(paragraph,pindex) in yjData.paragraphInfo.paragraphList">
+                <div v-for="(paragraph,pindex) in yjData.paragraphInfo.paragraphList" style="position:relative">
                     <p class="add-journey-btn">
                         <img src="img/add-journey.png" alt="">
-                        <span>添加行程</span>
+                        <span @click="addJourney(pindex)">添加行程</span>
                     </p>
-                    <div class="journey" >
+                    <img v-if="yjData.paragraphInfo.paragraphList.length>1" src="img/deleteIcon-gray.png" @click="delJourney(pindex)" class="del-paragraph">
+                    <div class="journey" :id="pindex">
 
                         <div class="title-name">
                             <input type="text" name="" placeholder="给这段旅程加个小标题~" v-model.trim="paragraph.journeyTitle" >
@@ -124,11 +125,11 @@
                         </div>
 
 
-                        <div v-for="journey in paragraph.journeyContent">
+                        <div class="journey-content" v-for="(journey,jindex) in paragraph.journeyContent">
                             <yjtextarea-component
                                     v-if="journey.type == 'text'"
                                     v-bind:str="journey.content"
-                                    v-bind:params="{defaultmaxlenth:2000,placeholder:'分享你的旅途故事',css:'content-text'}">
+                                    v-bind:params="{defaultmaxlenth:2000,pindex:pindex,jindex:jindex,placeholder:'分享你的旅途故事',css:'content-text'}">
                             </yjtextarea-component>
                             <div v-if="journey.type == 'img'" class="content-image clearfix">
                                 <div class="image fl">
@@ -139,8 +140,9 @@
                                         <span>旋转90°</span>
                                     </div>
                                 </div>
-                                <yjtextarea-component v-bind:str="journey.content" v-bind:params="{defaultmaxlenth:140,placeholder:'为图片添加描述~',css:'describe fl'}"></yjtextarea-component>
+                                <yjtextarea-component v-bind:str="journey.content" v-bind:params="{defaultmaxlenth:140,pindex:pindex,jindex:jindex,placeholder:'为图片添加描述~',css:'describe fl'}"></yjtextarea-component>
                             </div>
+                            <img src="img/deleteIcon-gray.png" @click="deleteItem(pindex,jindex)">
                         </div>
 
                         <div class="operate clearfix">
@@ -161,7 +163,7 @@
                 </div>
                 <div>
                     <p class="add-journey-btn"><img src="img/add-journey.png" @click="addJourney" alt="">
-                        <span @click="addJourney" >添加行程</span>
+                        <span @click="addJourney()" >添加行程</span>
                     </p>
                 </div>
                 <!-- end -->
@@ -212,6 +214,7 @@
 <!-- 弹层插件 -->
 <script type="text/javascript" src="libs/layer/layer.js"></script>
 
+<script type="text/javascript" src="libs/lodash.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript" src="js/popDialog.js"></script>
 <script type="text/javascript" src="js/component/yjselect2.js"></script>

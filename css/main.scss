@@ -580,6 +580,8 @@ input:focus{
             .catalog-text{
                 color: #999;
                 font-size: 14px;
+                margin-top: 6px;
+                display: inline-block;
             }
             .dragArticleText{
                 margin: 6px 0 2px 0;
@@ -596,6 +598,8 @@ input:focus{
                 ul{
                     margin-left: 7px;
                     margin-bottom: 10px;
+                    max-height: 267px;
+                    overflow-y: scroll;
                 }
                 li{
                     height:26px;
@@ -603,7 +607,6 @@ input:focus{
                     padding-left:11px;
                     border-left:1px solid #999;
                     font-size: 14px;
-                    color: #333;
                     position:relative;
                     &:after{
                         content: '';
@@ -612,11 +615,17 @@ input:focus{
                         border-radius: 50%;
                         border: 2px solid #fff;
                         position: absolute;
-                        top: 7px;
-                        left: -6px;
+                        top: 9px;
+                        left: -4px;
                         background: #999;
                     }
+                    a{
+                        color: #333;
+                    }
 
+                }
+                li.active{
+                    color: #F58833;
                 }
             }
             .dragArticleIcon{
@@ -957,6 +966,8 @@ input:focus{
             border-radius: 2px;
             box-sizing: border-box;
             border:1px solid #999;
+            font-size: 14px;
+            color: #333;
         }
         >span{
             width: 37px;
@@ -992,12 +1003,15 @@ input:focus{
             font-size: 12px;
             color: #FD5554;
         }
-        img{
+    }
+    .journey-content{
+        position: relative;
+        >img{
             position: absolute;
             width: 11px;
             height: 12px;
-            top: 4px;
-            right: 4px;
+            top: 6px;
+            right: 5px;
             &:hover{
                 cursor: pointer;
             }
@@ -1064,16 +1078,7 @@ input:focus{
                 font-size: 12px;
                 color: #999;
             }
-            img{
-                position: absolute;
-                width: 11px;
-                height: 12px;
-                top: -4px;
-                right: -4px;
-                &:hover{
-                    cursor: pointer;
-                }
-            }
+
         }
         textarea{
             width:100%;
@@ -1128,11 +1133,25 @@ input:focus{
     margin:12px 0;
     color:$blue;
     font-size:18px;
+    width: 100px;
+    &:hover{
+        cursor: pointer;
+    }
     img{
         width: 18px;
         height: 18px;
         vertical-align: middle;
         margin: -1px 2px 2px 2px;
+    }
+}
+.del-paragraph{
+    position: absolute;
+    width: 11px;
+    height: 12px;
+    top: 40px;
+    right: 5px;
+    &:hover{
+        cursor: pointer;
     }
 }
 

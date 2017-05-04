@@ -479,7 +479,9 @@ input:focus {
         height: 32px; }
       .content .right .catalog-article .catalog-text {
         color: #999;
-        font-size: 14px; }
+        font-size: 14px;
+        margin-top: 6px;
+        display: inline-block; }
       .content .right .catalog-article .dragArticleText {
         margin: 6px 0 2px 0;
         text-align: left;
@@ -493,14 +495,15 @@ input:focus {
         padding-left: 5px; }
         .content .right .catalog-article .catalog ul {
           margin-left: 7px;
-          margin-bottom: 10px; }
+          margin-bottom: 10px;
+          max-height: 267px;
+          overflow-y: scroll; }
         .content .right .catalog-article .catalog li {
           height: 26px;
           line-height: 26px;
           padding-left: 11px;
           border-left: 1px solid #999;
           font-size: 14px;
-          color: #333;
           position: relative; }
           .content .right .catalog-article .catalog li:after {
             content: '';
@@ -509,9 +512,13 @@ input:focus {
             border-radius: 50%;
             border: 2px solid #fff;
             position: absolute;
-            top: 7px;
-            left: -6px;
+            top: 9px;
+            left: -4px;
             background: #999; }
+          .content .right .catalog-article .catalog li a {
+            color: #333; }
+        .content .right .catalog-article .catalog li.active {
+          color: #F58833; }
       .content .right .catalog-article .dragArticleIcon {
         background: url("../img/dragArticle.png");
         display: block;
@@ -797,7 +804,9 @@ input:focus {
       line-height: 28px;
       border-radius: 2px;
       box-sizing: border-box;
-      border: 1px solid #999; }
+      border: 1px solid #999;
+      font-size: 14px;
+      color: #333; }
     .journey > .spend > span {
       width: 37px;
       text-align: center; }
@@ -826,13 +835,15 @@ input:focus {
       right: 7px;
       font-size: 12px;
       color: #FD5554; }
-    .journey .content-text img {
+  .journey .journey-content {
+    position: relative; }
+    .journey .journey-content > img {
       position: absolute;
       width: 11px;
       height: 12px;
-      top: 4px;
-      right: 4px; }
-      .journey .content-text img:hover {
+      top: 6px;
+      right: 5px; }
+      .journey .journey-content > img:hover {
         cursor: pointer; }
   .journey .content-image {
     border: 1px solid #999;
@@ -887,14 +898,6 @@ input:focus {
         right: 0px;
         font-size: 12px;
         color: #999; }
-      .journey .content-image .describe img {
-        position: absolute;
-        width: 11px;
-        height: 12px;
-        top: -4px;
-        right: -4px; }
-        .journey .content-image .describe img:hover {
-          cursor: pointer; }
     .journey .content-image textarea {
       width: 100%; }
 
@@ -938,12 +941,24 @@ input:focus {
   text-align: left;
   margin: 12px 0;
   color: #1A8CED;
-  font-size: 18px; }
+  font-size: 18px;
+  width: 100px; }
+  .add-journey-btn:hover {
+    cursor: pointer; }
   .add-journey-btn img {
     width: 18px;
     height: 18px;
     vertical-align: middle;
     margin: -1px 2px 2px 2px; }
+
+.del-paragraph {
+  position: absolute;
+  width: 11px;
+  height: 12px;
+  top: 40px;
+  right: 5px; }
+  .del-paragraph:hover {
+    cursor: pointer; }
 
 .tags-popup {
   top: 50%;

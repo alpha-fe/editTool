@@ -24,7 +24,7 @@ var mainVue = new Vue({
         /**
          * 添加行程
          */
-        addJourney:function(){
+        addJourney:function(pindex){
             // todo：未完成
             // todo:check
             // check不过 返回
@@ -36,15 +36,38 @@ var mainVue = new Vue({
             var journey = {
                 "journeyId": "0",
                 "journeyTitle": "",
-                "address": "行程1",
+                "address": "",
                 "addressInfo": "",
-                "startCost": null,
-                "endCost": null,
+                "startCost": "",
+                "endCost": "",
                 "startTime": "",
                 "tagdict": [],
-                "journeyContent": []
+                "journeyContent": [
+                    {
+                        "id": "",
+                        "imgurl": "",
+                        "content": "",
+                        "type": "text",
+                        "width": "",
+                        "height": ""
+                    }
+                ]
             };
-            this.yjData.paragraphInfo.paragraphList.push(journey);
+            if(typeof(pindex) == "undefined"){
+
+                this.yjData.paragraphInfo.paragraphList.push(journey);
+
+            }else{
+
+                this.yjData.paragraphInfo.paragraphList.splice(pindex,0,journey);
+
+            }
+        },
+        /**
+         * 删除行程
+         */
+        delJourney:function(pindex){
+            this.yjData.paragraphInfo.paragraphList.splice(pindex,1);
         },
         /**
          * 添加正文
@@ -59,6 +82,13 @@ var mainVue = new Vue({
                 height: "500"
             };
             this.yjData.paragraphInfo.paragraphList[index].journeyContent.push(content);
+        },
+        /**
+         * 删除正文或图片
+         */
+        deleteItem:function(pindex,jindex){
+
+            this.yjData.paragraphInfo.paragraphList[pindex].journeyContent.splice(jindex,1);
         },
         /**
          * 添加标签
