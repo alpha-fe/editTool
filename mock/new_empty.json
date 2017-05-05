@@ -1,0 +1,39 @@
+{
+  "id": "",
+  "userId": "",
+  "coverInfo": {
+    "coverUrl": "",
+    "title": "",
+    "destination": "",
+    "destinationInfo": "",
+    "perCost": "",
+    "startTime": "",
+    "tagdict": []
+  },
+  "paragraphInfo": {
+    "id": "",
+    "dayNum": "",
+    "paragraphList": [
+      {
+        "id": "",
+        "journeyTitle": "",
+        "address": "",
+        "addressInfo": "",
+        "startCost": 0,
+        "endCost": 0,
+        "startTime": "",
+        "tagdict": [],
+        "journeyContent": [
+          {
+            "id": "0",
+            "imgurl": "",
+            "content": "",
+            "type": "",
+            "width": "",
+            "height": ""
+          }
+        ]
+      }
+    ]
+  }
+}
