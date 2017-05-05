@@ -654,7 +654,8 @@ input:focus {
       font-size: 30px;
       color: #1A8CED;
       border-bottom: 1px solid #ccc;
-      position: relative; }
+      position: relative;
+      text-align: center; }
       .dragArticle .journey-catalog li:hover {
         cursor: pointer; }
       .dragArticle .journey-catalog li.active:after {
