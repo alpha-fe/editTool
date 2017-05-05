@@ -3,7 +3,7 @@
  * 
  * 参数说明:
  * 
- *  依赖：vue2.0,jquery,gridly
+ *  依赖：vue2.0,jquery,jquery-ui
  * 
  *  使用示例：
  * Created by xujia on 2017/4/24.
@@ -25,7 +25,7 @@ Vue.component('yjpicmixtool-component', {
 		'			<a href="javascript:void(0);" @click="hideMixtool">关闭</a>' +
 		'			<a href="javascript:void(0);" @click="saveMixtool">保存</a>' +
 		'		</div>' +
-		'		<div>' +
+		'		<div class="drag-con">' +
 		'			<ul class="clearfix gridly" v-show="tabSelected==pindex" v-for="(paragraph,pindex) in data.paragraphList" style="position: relative;">' +
 		'				<li v-for="(item,jindex) in paragraph.journeyContent" :id="\'\'+pindex+jindex" :mid="jindex" class="dragArticle-item fl">' +
 		'					<div class="brick small">' +
@@ -40,7 +40,7 @@ Vue.component('yjpicmixtool-component', {
 		'					</div>' +
 		'				</li>' +
 		'			</ul>' +
-		'			<ul>' +
+			'		<ul>' +
 		'				<a href="javascript:void(0);" @click="addContent($event)" class="fl">' +
 		'					<img src="img/addTextIcon.png" alt="">' +
 		'					<span class="text">添加正文</span>' +
@@ -49,7 +49,7 @@ Vue.component('yjpicmixtool-component', {
 		'					<img src="img/addImgIcon.png" alt="">' +
 		'					<span class="img-number">0/50</span>' +
 		'					<span class="text">添加图片</span>' +
-		'					<yjupload2-component @childup="uploadimg" ></yjupload2-component>'+
+		'					<yjupload-component @childup="uploadimg" ></yjupload-component>'+
 		'				</a>' +
 		'			</ul>' +
 		'		</div>' +
@@ -94,56 +94,15 @@ Vue.component('yjpicmixtool-component', {
 	mounted: function() {
 
 		var self = this;
-		//拖动前回调
-		var reordering = function($elements) {
-			// Called before the drag and drop starts with the elements in their starting position.
-			//			window.console.log(this);
-		}
+        var $dragCon = $('div.drag-con');
+    	$dragCon.find(".gridly").each(function(){
 
-		//拖动后回调
-		var reordered = function($elements) {
-			// Called after the drag and drop ends with the elements in their ending position.
-			// 当前对象
-			var currentObj = this.reordered.arguments[1];
-			if(typeof currentObj === 'undefined') {
-				return;
-			}
-			var currentId = $(currentObj[0]).attr('mid');
-			window.console.log('拖动对象：' + currentId);
-
-			//			var arrEle = $elements;
-			//			//执行保存排序，更新数据.
-			//			var sortArrIndex = [];
-			//			for(var i = 0; i < arrEle.length; i++) {
-			//				var ele = $(arrEle[i]);
-			//				var mid = ele.attr("mid");
-			//				sortArrIndex.push(parseInt(mid));
-			//			}
-			//			window.console.log('排序：' + JSON.stringify(sortArrIndex));
-			//			// 保存排序的index序列
-			//			self.tabJourneySorted[self.tabSelected] = sortArrIndex;
-			//			self.tabJourneyOpRecord[self.tabSelected].push({op:'sort',sortArrIndex});
-			//			// 排序
-			//			var paragraph = self.data.paragraphList[self.tabSelected];
-			//			var jContentSorted = [];
-			//			for(var i = 0; i < sortArrIndex.length; i++) {
-			//				var index = sortArrIndex[i];
-			//				jContentSorted.push(paragraph.journeyContent[index]);
-			//			}
-			//			// 排序保存
-			//			self.baseData.paragraphList[self.tabSelected].journeyContent = jContentSorted;
-			//			window.console.log('排序后：' + JSON.stringify(jContentSorted));
-			//			self.data.paragraphList[self.tabSelected].journeyContent = jContentSorted;
-			//	
-			//			Vue.nextTick(function() {
-			//				$('.gridly').gridly('layout');
-			//			})
-		};
-
-		$('.gridly').gridly({
-			callbacks: { reordering: reordering, reordered: reordered }
-		});
-
+	        $(this).sortable({
+				placeholder: "ui-state-highlight dragArticle-item fl",
+	        	cursor: "move"
+	        });
+	        $(this).disableSelection();
+        });
 	},
 	methods: {
 		/**
@@ -201,10 +160,6 @@ Vue.component('yjpicmixtool-component', {
 
 			this.data.paragraphList[this.tabSelected].journeyContent.push(content);
 
-			Vue.nextTick(function() {
-				$('.gridly').gridly('layout');
-			})
-
 			console.log('add text');
 		},
 		/**
@@ -241,17 +196,13 @@ Vue.component('yjpicmixtool-component', {
 			img.imgurl = r.result;
 			this.data.paragraphList[this.tabSelected].journeyContent.push(img);
 
-			Vue.nextTick(function() {
-				$('.gridly').gridly('layout');
-			})
-
 //			console.log('add img')
 		},
 		/**
 		 * 添加图片
 		 */
 		addImg: function(event) {
-			var $uploadinput = $(event.target).find('input');
+			var $uploadinput = $(event.target).parents('ul').find('input');
 			$uploadinput.click();
 	
 		},
@@ -263,10 +214,6 @@ Vue.component('yjpicmixtool-component', {
 		del: function(index, event) {
 			var journeyEl = $(event.currentTarget);
 			journeyEl.parent().parent().remove();
-
-			Vue.nextTick(function() {
-				$('.gridly').gridly('layout');
-			})
 
 		},
 		/**

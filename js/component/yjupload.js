@@ -12,7 +12,7 @@
  * Created by xujia on 2017/4/23.
  */
 Vue.component('yjupload-component', {
-	props: [],
+	props: ['index'],
 	data: function() {
 		return {
 			serverUrl: "http://127.0.0.1:808",
@@ -23,27 +23,18 @@ Vue.component('yjupload-component', {
 		}
 	},
 	template: '' +
-		'<a href="#"  v-on:click="addImg" class="fl">' +
-		'	<img src="img/addImgIcon.png" alt="">' +
-		'	<span class="img-number">0/50</span>' +
-		'	<span  class="text">添加图片</span>	' +		
-//		'	<div style="display: none;">'+
-		'   		<input style="display: none;" id="fileupload" name="upload_filename" type="file" accept=".jpg,.png,.bmp,jpeg" />' +
-//		'	</div>'+
-		'</a>',
+		'	<div style="display: none;">'+
+		'   		<input style="display: none;" name="upload_filename" type="file" accept=".jpg,.png,.bmp,jpeg" />' +
+		'	</div>',
 	mounted: function() {
+		var self = this;
 		var addimgEl = this.$el.querySelector('input');
 		this.$options.methods.initFileUpload.bind(this)(addimgEl, function(r) {
-			//设置添加成功得图片
-			var imgUrl = r.result;
+			//将事件上传
+			self.$emit('childup', r, self.index);
 		})
 	},
 	methods: {
-		addImg:function(){
-			var addimgEl = this.$el.querySelector('input');
-			$(addimgEl).click();
-			return false;
-		},
 		initFileUpload: function(input, callback, nochecksmall) {
 			
 			var self = this;

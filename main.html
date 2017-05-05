@@ -9,12 +9,31 @@
     <link rel="stylesheet" href="libs/select2/css/select2.min.css" />
     <link rel="stylesheet" href="libs/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="libs/cropper/cropper.css">
-    <link rel="stylesheet" href="libs/gridly/jquery.gridly.css">
+    <!--<link rel="stylesheet" href="libs/gridly/jquery.gridly.css">-->
     <link rel="stylesheet" href="css/uploadcut/uploadcutimg.css">
 
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/main.css" />
+	<script type="text/javascript">
+		var domain = "http://you.autohome.com.cn";
+		// 浏览器校验 ie9（包含ie9）跳转到浏览器下载页
+  		var isIE=!!window.ActiveXObject;
 
+        var browser=navigator.appName
+        var b_version=navigator.appVersion
+        var version=b_version.split(";");
+        var trim_Version=version[1].replace(/[ ]/g,"");
+        if(!!window.ActiveXObject || "ActiveXObject" in window){
+            if( browser=="Microsoft Internet Explorer" && trim_Version=="MSIE7.0" ){
+                window.location.href = domain+'/tripnote/pc/browserTipEdit';
+            }else if( browser=="Microsoft Internet Explorer" && trim_Version=="MSIE8.0" ){
+                window.location.href = domain+'/tripnote/pc/browserTipEdit';
+            }else if( browser=="Microsoft Internet Explorer" && trim_Version=="MSIE9.0" ){
+                window.location.href = domain+'/tripnote/pc/browserTipEdit';
+            }
+        }
+	
+	</script>
 </head>
 
 <body>
@@ -52,7 +71,6 @@
     </div>
 </div>
 <div id="app">
-
     <!--
          作者：offline
          时间：2017-04-20
@@ -151,8 +169,13 @@
                                 <img src="img/addTextIcon.png" alt="">
                                 <span class="text">添加正文</span>
                             </a>
-                            <upload-auto></upload-auto>
-                            <div class="fl warn">
+                           	<a href="javascript:void(0);"  v-on:click="uploadimg($event)" class="fl">
+								<img src="img/addImgIcon.png" alt="">
+								<span class="img-number">0/50</span>
+								<span  class="text">添加图片</span>	
+								<yjupload-component @childup="uploadedimg" v-bind:index="pindex"></yjupload-component>
+							</a>
+	                            <div class="fl warn">
                                 <p>单个行程最多添加50张图片</p>
                                 图片单张大小不超过20M<br> 支持jpg、png、bmp格式的图片
                                 <br> 图片最小支持：320*800px，最大支持9999*9999px
@@ -192,7 +215,20 @@
         <div class="shadow" id="shadow"></div>
     </div>
 </div>
-
+<script type="text/javascript">
+	 /**
+	  * 离开页面时的处理
+	  * @param {Object} e
+	  */
+  	function checkLeavePage(e){
+        var confirmationMessage = "确定离开此页面?您已输入的内容将不会被保存";
+        (e || window.event).returnValue = confirmationMessage; // Gecko and Trident
+        return confirmationMessage; // Gecko and WebKit
+    }
+    window.addEventListener("beforeunload", checkLeavePage);
+    window.addEventListener("unload", checkLeavePage);
+	
+</script>
 <script type="text/javascript" src="libs/vue-2.26.js"></script>
 <script type="text/javascript" src="libs/jquery.min.v2.1.4.js"></script>
 <script type="text/javascript" src="libs/jquery-ui/jquery-ui.js"></script>
@@ -210,16 +246,17 @@
 <!-- 上传图片 -->
 <script type="text/javascript" src="libs/jquery.fileupload.js"></script>
 <!-- 拖拽  -->
-<script type="text/javascript" src="libs/gridly/jquery.gridly.js"></script>
+<!--<script type="text/javascript" src="libs/gridly/jquery.gridly.js"></script>-->
 <!-- 弹层插件 -->
 <script type="text/javascript" src="libs/layer/layer.js"></script>
 
 <script type="text/javascript" src="libs/lodash.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript" src="js/popDialog.js"></script>
+<script type="text/javascript" src="js/component/yjeditcheck.js"></script>
 <script type="text/javascript" src="js/component/yjselect2.js"></script>
 <script type="text/javascript" src="js/component/yjuploadcut.js"></script>
-<script type="text/javascript" src="js/component/upload.js"></script>
+<script type="text/javascript" src="js/component/yjupload.js"></script>
 <script type="text/javascript" src="js/component/yjdatepicker.js"></script>
 <script type="text/javascript" src="js/component/yjtextarea.js"></script>
 <script type="text/javascript" src="js/component/yjcatalog.js"></script>

@@ -1089,3 +1089,9 @@ input:focus {
     text-indent: 10px; }
 
 /*# sourceMappingURL=main.css.map */
+
+/* 拖拽的样式 */
+.ui-state-highlight{
+  background:transparent;!important;
+  border: 2px dashed #fff;!important;
+}
