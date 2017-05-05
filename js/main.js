@@ -5,15 +5,20 @@ var mainVue = new Vue({
         isReady:false,			// 获取到json数据后设置为true
         showYjpicmixtool:false,	// 每次关闭图文混排都销毁组件
         hasTags: false,			// true:显示修改标签 false:添加标签
-        yjData:{}
+        yjData:{},				// 游记数据
+        queryParams:[]			// query参数
     },
     created: function() {
+//  	// 获取url参数
+    	this.queryParams = utils.getQueryParams();
+    	
 //		$.ajaxSettings.async = true;
         self = this;
         $.getJSON("mock/main.json", function(data) {
             self.yjData = data;
             self.isReady = true;
         });
+        
 
     },
     mounted: function() {
@@ -21,6 +26,18 @@ var mainVue = new Vue({
 
     },
     methods: {
+    	/**
+    	 * 游记老数据转换为新数据
+    	 */
+    	oldConverToNew:function(){
+    		// 首先判断有无
+    	},
+    	/**
+    	 * 页面打开时草稿的校验
+    	 */
+    	initLoadCheck:function(tripId){
+
+    	},
         /**
          * 添加行程
          */
@@ -173,12 +190,20 @@ var mainVue = new Vue({
          * 预览
          */
         preview: function() {
+        	//去掉离开页面弹窗
+           	window.removeEventListener("beforeunload", checkLeavePage);
+           	window.removeEventListener("unload", checkLeavePage);
+  
             console.log('预览');
         },
         /**
          * 发布
          */
         publish: function() {
+        	//去掉离开页面弹窗
+           	window.removeEventListener("beforeunload", checkLeavePage);
+           	window.removeEventListener("unload", checkLeavePage);
+           	
             console.log('发布');
         }
     }
