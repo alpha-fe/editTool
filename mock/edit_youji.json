@@ -1,0 +1,139 @@
+{
+  "message": "",
+  "result": {
+    "contentCount": 0,
+    "coverInfo": {
+      "convertTagdict": [
+        {
+          "code": "0020001000001",
+          "text": "美食"
+        },
+        {
+          "code": "0060001000010",
+          "text": "自驾"
+        }
+      ],
+      "coverUrl": "http://img2.autoimg.cn/travelplat/g15/M05/72/37/wKgH1lj6yD6AXuNmAAFNJpcc1X8431.jpg",
+      "createTime": "2017-04-22 11:58:33",
+      "destination": "veromoda阿拉善左旗进来看商场店",
+      "destinationInfo": "38.843806,105.684628",
+      "perCost": "500-999",
+      "startTime": "2017-04-17",
+      "tagdict": "{\"0020001000001\":\"美食\",\"0060001000010\":\"自驾\"}",
+      "title": "dfg",
+      "travelId": 53531,
+      "tripDays": 1
+    },
+    "createDate": "2017-04-18 01:08:38.0",
+    "createTime": "2017-04-18 01:08:38.0",
+    "createType": "pc",
+    "id": 53531,
+    "ip": "192.168.8.166",
+    "isFlag": 0,
+    "isRefine": 0,
+    "lastEidtDate": "2017-04-22 11:58:32",
+    "paragraphInfo": [
+      {
+        "dayId": "2aae4f19905ecd3fbebfe82686fc6033",
+        "dayNum": 1,
+        "journeyList": [
+          {
+            "address": "",
+            "addressInfo": "",
+            "contentCount": 0,
+            "createTime": "2017-04-22 11:58:33",
+            "endCost": 0,
+            "isFlag": 0,
+            "journeyContent": "",
+            "journeyDayId": "2aae4f19905ecd3fbebfe82686fc6033",
+            "journeyNum": 0,
+            "journeyTagdict": "{}",
+            "journeyTitle": "",
+            "picCount": 0,
+            "picInfoList": [
+              
+            ],
+            "startCost": 0,
+            "startTime": "2017-04-17",
+            "travelId": 53531
+          },
+          {
+            "address": "",
+            "addressInfo": "",
+            "contentCount": 0,
+            "createTime": "2017-04-22 11:58:33",
+            "endCost": 0,
+            "id": "cf48eb14e5942e28971666b0fbf115f3",
+            "isFlag": 0,
+            "journeyContent": "",
+            "journeyDayId": "2aae4f19905ecd3fbebfe82686fc6033",
+            "journeyNum": 1,
+            "journeyTagdict": "{}",
+            "journeyTitle": "",
+            "picCount": 0,
+            "picInfoList": [
+              {
+                "createTime": "2017-04-22 11:58:33",
+                "createType": "pc",
+                "height": 1024,
+                "journeyId": "cf48eb14e5942e28971666b0fbf115f3",
+                "picAddress": "",
+                "picAddressInfo": "",
+                "picContent": "",
+                "picId": "559b46bb677c688bf6653b86454f3043",
+                "picUrl": "http://img2.autoimg.cn/travelplat/g17/M02/70/73/wKgH51j6u5yAIwl7AADr9cE2aGI065.jpg",
+                "spinAngle": 90,
+                "travelId": 53531,
+                "width": 625
+              }
+            ],
+            "startCost": 0,
+            "startTime": "2017-04-17",
+            "travelId": 53531
+          }
+        ],
+        "paragraphList": [
+          {
+            "address": "",
+            "addressInfo": "",
+            "contentCount": 0,
+            "createTime": "2017-04-22 11:58:33",
+            "endCost": 0,
+            "id": "cf48eb14e5942e28971666b0fbf115f3",
+            "isFlag": 0,
+            "journeyContent": [
+              {
+                "address": "",
+                "content": "",
+                "geoinfo": "",
+                "height": 1024,
+                "id": "559b46bb677c688bf6653b86454f3043",
+                "imgurl": "http://img2.autoimg.cn/travelplat/g17/M02/70/73/wKgH51j6u5yAIwl7AADr9cE2aGI065.jpg",
+                "index": 0,
+                "paragraphId": "cf48eb14e5942e28971666b0fbf115f3",
+                "spinAngle": 90,
+                "type": "img",
+                "width": 625
+              }
+            ],
+            "journeyDayId": "2aae4f19905ecd3fbebfe82686fc6033",
+            "journeyNum": 0,
+            "journeyTagdict": "{}",
+            "journeyTitle": "",
+            "picCount": 0,
+            "startCost": 0,
+            "startTime": "2017-04-17",
+            "travelId": 53531
+          }
+        ],
+        "startDate": "2017-04-17",
+        "travelId": 53531
+      }
+    ],
+    "picCount": 1,
+    "userId": 33623528,
+    "userName": "wmtnl2004",
+    "userPic": "https://x.autoimg.cn/space/images/head_120X120.gif"
+  },
+  "returncode": 0
+}

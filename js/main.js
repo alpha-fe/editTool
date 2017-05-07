@@ -2,141 +2,112 @@ var baseData = {};
 var mainVue = new Vue({
     el: '#app',
     data: {
+    	apiConfig : {},
         isReady:false,			// 获取到json数据后设置为true
         showYjpicmixtool:false,	// 每次关闭图文混排都销毁组件
         hasTags: false,			// true:显示修改标签 false:添加标签
         yjData:{},				// 游记数据
-        queryParams:[]			// query参数
+      	enterType:enterType		// 进入类型 0 发表游记 1 编辑 2 续写 3从草稿进入
     },
     created: function() {
-//  	// 获取url参数
-    	this.queryParams = utils.getQueryParams();
-    	
-//		$.ajaxSettings.async = true;
         self = this;
-        $.getJSON("mock/main.json", function(data) {
-            self.yjData = data;
-            self.isReady = true;
-        });
+        this.apiConfig = CONF;
+		// 勿删除 todo: 初始化方法
+//		this.initByCreated();
         
-      	$.getJSON("mock/old_sample.json", function(data) {
-            self.oldConverToNew(data.result);
-        });
+        //  test
+        $.getJSON("mock/main.json", function(data) {
+            	self.yjData = data;
+            	self.isReady = true;
+	    });
+   
     },
     mounted: function() {
-
-
+    	
+		this.initByMounted();
     },
     methods: {
     	/**
-    	 * 将获取到的标签字符串信息转换为对象
-    	 * @param {Object} strJson
+    	 * mounted事件中的初始化
     	 */
-    	oldConverToTags:function(strJson){
-    		
-    		if(typeof strJson !== "string"){
-    			return strJson;
-    		}
-    		// strJson 若是string则转换成array返回
-    		var tmpCoverTagdict = JSON.parse(strJson);
-			//	tagdict	 	 	n	String	标签
-			//		code			String	标签code
-			//		text			String	标签text
-			var coverTagdict = [];
-			for(k in tmpCoverTagdict) {
-				var v = tmpCoverTagdict[k];
-				if(k != "99") {
-					coverTagdict.push({ "code": k, "text": v });
-					continue;
-				}
-				var customTags = v.split(',');
-				for(var i=0;i<customTags.length;i++){
-					var tagName = customTags[i];
-					coverTagdict.push({ "code": "99", "text": tagName });
-				}
-			}
-			return coverTagdict;
+    	initByCreated:function(){
+    		self = this;
+    		var tripId = queryParams['tripId'];
+	        if(yjDraftData == null){
+	        	if(enterType == 0){ // 新游记
+	        		$.getJSON("mock/new_empty.json", function(data) {
+	            		self.yjData = data;
+	            		self.isReady = true;
+		        	});
+		        	
+	        	}else if(enterType == 1){	// 编辑
+	        		// http://xujia.autohome.com.cn/editTool/main.html?tripId=53531&travelStatus=detail 测试编辑数据
+	        		yjTools.getTravelById(tripId,function(data){
+	        			if (data && data.returncode == 0) {
+		                    self.yjData = yjTools.oldConvertToNew(data.result);
+		                }else{
+		                	
+		                }
+	        			self.isReady = true;
+	        		});
+	        		
+	        	}else if(enterType == 2){	// 续写
+	        		// http://xujia.autohome.com.cn/editTool/main.html?tripId=53531&travelStatus=detail&c=0 测试续写数据
+	        		yjTools.getTravelById(tripId,function(data){
+	        			if (data && data.returncode == 0) {
+		                    self.yjData = yjTools.oldConvertToNew(data.result);
+		                }else{
+		                	
+		                }
+	        			self.isReady = true;
+	        		});
+	        	}else if(enterType == 3){	// 草稿
+	        		// http://xujia.autohome.com.cn/editTool/main.html?tripId=54565 测试草稿数据
+	        		yjTools.getNewDraftTravelNote(tripId,function(data){
+	        			if (data && data.returncode == 0) {
+		                    self.yjData = yjTools.oldConvertToNew(data.result);
+		                }else{
+		                	
+		                }
+	        			self.isReady = true;
+	        		});
+	        	}
+	
+	        }else{
+	    	 	self.yjData = yjDraftData;
+	        	self.isReady = true;
+	        }
+	        
+	        if(typeof self.yjData.paragraphInfo === "undefined" 
+	        	|| self.yjData.paragraphInfo == null 
+	        	|| self.yjData.paragraphInfo.length == 0){
+	        	self.yjData.paragraphInfo = [{
+										        "id": "",
+										        "journeyTitle": "",
+										        "address": "",
+										        "addressInfo": "",
+										        "startCost": 0,
+										        "endCost": 0,
+										        "startTime": "",
+										        "tagdict": [],
+										        "journeyContent": [
+										          {
+										            "id": "0",
+										            "imgurl": "",
+										            "content": "",
+										            "type": "",
+										            "width": "",
+										            "height": ""
+										          }
+										        ]
+										      }];
+	        }
     	},
     	/**
-    	 * 游记老数据转换为新数据
+    	 * mounted事件中的初始化
     	 */
-    	oldConverToNew:function(od){
-    		// 首先判断有无
-    		// 首先判断有无
-
-			var nd = {};
-			//id				n	int	游记id：发布传0
-			nd.id = od.id;
-			//userId				y	int	用户id
-			nd.userId = od.userId;
-			//coverInfo				y		封面信息
-			var coverInfo = {};
-			//	coverUrl	 	 	n	String	封面URL
-			coverInfo.coverUrl = od.coverInfo.coverUrl;
-			//	title	 	 	y	String	标题
-			coverInfo.title = od.coverInfo.title;
-			//	startTime	 	 	n	String	出发时间
-			coverInfo.startTime = od.coverInfo.startTime;
-			//	destination	 	 	n	String	目的地
-			coverInfo.destination = od.coverInfo.destination;
-			//	destinationInfo	 	 	n	String	目的地的经纬度信息
-			coverInfo.destinationInfo = od.coverInfo.destinationInfo;
-			//	perCost	 	 	n	String	人均花费
-			coverInfo.perCost = od.coverInfo.perCost;
-			// tag转换成数组
-			coverInfo.tagdict = this.oldConverToTags(od.coverInfo.tagdict);
-			nd.coverInfo = coverInfo;
-			// 行程信息
-			nd.paragraphInfo = [];
-			var paragraphInfo = {};
-			// dayId						day id:发布传0
-			paragraphInfo.dayId = null;
-			// dayNum					Daynum:发布传0
-			paragraphInfo.dayNum = null;
-			// paragraphList			行程list
-			var nParagraphList = [];
-		
-			// 
-			for(var i =0;i<od.paragraphInfo.length;i++){
-				var tmpInfo = od.paragraphInfo[i];
-				for(var j=0;j<tmpInfo.paragraphList.length;j++){
-					var tmpParagraph = tmpInfo.paragraphList[j];
-					var nParagraph = {};
-					//	id		n	String	行程id:发布传0
-					nParagraph.id = tmpParagraph.id;
-					//	journeyTitle		y	String	行程标题
-					nParagraph.journeyTitle = tmpParagraph.journeyTitle;
-					//	address		n	String	出发地
-					nParagraph.address = tmpParagraph.address;
-					//	addressInfo		n	String	出发地经纬度(逗号隔开)
-					nParagraph.addressInfo = tmpParagraph.addressInfo;
-					//	startCost		n		最低消费
-					nParagraph.startCost = tmpParagraph.startCost;
-					//	endCost		n		最高消费
-					nParagraph.endCost = tmpParagraph.endCost;
-					//	startTime		n		出行时间
-					nParagraph.startTime = tmpParagraph.startTime;
-					nParagraph.journeyTagdict = this.oldConverToTags(tmpParagraph.journeyTagdict);
-					nParagraph.journeyContent = [];
-					for(var k=0;k<tmpParagraph.journeyContent.length;k++){
-						var tmpJourney = tmpParagraph.journeyContent[k];
-						var nJourney = {};
-						nJourney.id = tmpJourney.id;
-						nJourney.imgurl = tmpJourney.imgurl;
-						nJourney.content = tmpJourney.content;
-						nJourney.type = tmpJourney.type;
-						nJourney.width = tmpJourney.width;
-						nJourney.height = tmpJourney.height;
-						
-						nParagraph.journeyContent.push(nJourney);
-					}
-					nParagraphList.push(nParagraph);
-				}
-			}
-			paragraphInfo.paragraphList = nParagraphList
-			nd.paragraphInfo.push(paragraphInfo);
-			
-			window.console.log(JSON.stringify(nd));
+    	initByMounted:function(){
+    		
     	},
     	/**
     	 * 页面打开时草稿的校验
@@ -290,6 +261,10 @@ var mainVue = new Vue({
          * 手动保存草稿
          */
         manualSaveNote: function() {
+        	var yjdraftData = this.yjData;
+        	yjTools.saveDraftToServer(yjdraftData,function(data){
+        		layer.alert("保存成功");
+        	})
             console.log('手动保存草稿');
         },
         /**

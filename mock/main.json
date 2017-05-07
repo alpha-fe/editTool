@@ -7,7 +7,7 @@
     "destination": "北京市",
     "destinationInfo": "39.911013,116.413554"
   },
-  "paragraphInfo": {
+  "paragraphInfo": [{
     "id": "",
     "dayNum": "",
     "paragraphList": [
@@ -78,5 +78,5 @@
         ]
       }
     ]
-  }
+  }]
 }

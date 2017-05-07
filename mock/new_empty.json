@@ -10,7 +10,7 @@
     "startTime": "",
     "tagdict": []
   },
-  "paragraphInfo": {
+  "paragraphInfo": [{
     "id": "",
     "dayNum": "",
     "paragraphList": [
@@ -35,5 +35,5 @@
         ]
       }
     ]
-  }
+  }]
 }

@@ -30,10 +30,9 @@
  * Created by xujia on 2017/4/16.
  */
 Vue.component('yjuploadcut-component', {
-	props: ["imgurl"],
+	props: ["imgurl","upurl"],
 	data: function() {
 		return {
-			serverUrl: "http://127.0.0.1:808",
 			// 提交图片按钮
 			inputfile: "div.head-img a",
 			// 剪裁图片显示的modal
@@ -52,8 +51,8 @@ Vue.component('yjuploadcut-component', {
 	template: '' +
 		'<div>' +
 		'	<div class="head-img clearfix" v-bind:style="imgUrlStyle">' +
-		'		<img v-show="imgUrl==null" src="img/headerImgIcon.png" alt="" class="fl">' +
-		'		<div class="fl text" v-show="imgUrl==null">' +
+		'		<img v-show="imgUrl==null || imgUrl==\'\'" src="img/headerImgIcon.png" alt="" class="fl">' +
+		'		<div class="fl text" v-show="imgUrl==null || imgUrl==\'\'">' +
 		'			<p style="font-size: 16px">设置游记封面</p>' +
 		'			<p>游记封面将会展示在列表页中，请认真选择哦～</p>' +
 		'		</div>' +
@@ -75,7 +74,9 @@ Vue.component('yjuploadcut-component', {
 		'</div>',
 	created: function() {
 		this.imgUrl = this.imgurl;
-		this.imgUrlStyle = 'background-image:url(' + this.imgurl + ')';
+		if(this.imgUrl){
+			this.imgUrlStyle = 'background-image:url(' + this.imgurl + ')';
+		}
 		this.uploadImgName = this.imgUrl ? "更改封面":"设置封面";
 	},
 	mounted: function() {
@@ -108,7 +109,7 @@ Vue.component('yjuploadcut-component', {
 		 * @param {Object} uploadUrl
 		 */
 		save: function(self, base64data) {
-			var uploadUrl = self.serverUrl + "/upload/uploadforbase64";
+			var uploadUrl = self.upurl;
 			self.$options.methods.saveBase64Pic(base64data, uploadUrl, function(imgUrl) {
 				self.imgUrl = imgUrl;
 				self.imgUrlStyle = 'background-image:url(' + imgUrl + ')';
