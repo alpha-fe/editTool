@@ -1,12 +1,13 @@
 var queryParams = utils.getQueryParams();	// url的query参数
 var enterType = 0;							// 进入方式
 var yjDraftData = null;						// 游记本地草稿数据
+var userId = "";							// 用户ID
 (function(){
 	var tripId = queryParams['tripId'];
 	var travelStatus = queryParams["travelStatus"];
 	var isContinue = queryParams["c"] === "0";
 	
-	var userId= yjTools.getUserIdByCookie();
+	userId= yjTools.getUserIdByCookie();
 	// 未登陆用户去登陆
 	if (userId == ""){
         var loacation = window.location.href;
