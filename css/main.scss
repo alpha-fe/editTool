@@ -827,6 +827,27 @@ input:focus{
                 color: #666;
                 font-size: 28px;
             }
+            
+            .dragArticle-close{
+                width: 100px;
+                height: 40px;
+                border-radius: 2px;
+                line-height: 40px;
+                border: 1px solid $blue;
+                color: $blue;
+                display: inline-block;
+                text-align: center;
+            }
+            .dragArticle-save{
+                width: 100px;
+                height: 40px;
+                border-radius: 2px;
+                line-height: 40px;
+                background: $blue;
+                color: #fff;
+                display: inline-block;
+                text-align: center;
+            }
         }
         ul{
             overflow-y: scroll;
@@ -839,6 +860,7 @@ input:focus{
                 margin-right:20px;
                 color: $blue;
                 position:relative;
+                text-align: center;
                 img{
                     width:50px;
                     margin:28px 38px 6px;
@@ -872,6 +894,7 @@ input:focus{
                     font-size: 18px;
                     width: 100%;
                     line-height: 41px;
+                    text-align: center;
                     &:after{
                         content: '';
                         width:100%;
@@ -1238,8 +1261,9 @@ input:focus{
             overflow-y: scroll;
         }
         .tag{
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             position: relative;
+            padding-top: 2px;
         }
         .tag.more{
             height:56px;
@@ -1253,7 +1277,7 @@ input:focus{
             border-radius: 2px;
             position: absolute;
             top: 50%;
-            margin-top: -15px;
+            margin-top: -18px;
         }
         .tag-type.more{
             margin-top: 15px;
@@ -1300,3 +1324,191 @@ input:focus{
         @include input(40px);
     }
 }
+
+.dragArticle-add-content{
+    display: none;
+    width:902px;
+    height:520px;
+    position: fixed;
+    top:50%;
+    margin-top:-260px;
+    left:50%;
+    margin-left:-451px;
+    background: #fff;
+    z-index: 9999;
+    .head{
+        height:73px;
+        line-height: 73px;
+        border-bottom: 1px solid #ccc;
+        font-size: 24px;
+        color: #333;
+        text-align: center;
+        position: relative;
+        .close{
+            position: absolute;
+            top:15px;
+            right:15px;
+            width:15px;
+        }
+    }
+    .content{
+        padding: 20px 30px;
+        width: 100%;
+        height: 363px;
+        box-sizing: border-box;
+        position: relative;
+        textarea{
+            width:100%;
+            height:100%;
+            border:1px solid $blue;
+            border-radius: 2px;
+            padding:6px;
+            box-sizing: border-box;
+        }
+        span{
+            position: absolute;
+            bottom: 21px;
+            right: 35px;
+            font-size: 12px;
+            color: #999;
+        }
+    }
+    .foot{
+        height:84px;
+        line-height: 84px;
+        background: #eee;
+        text-align: center;
+        span{
+            display: inline-block;
+            width:200px;
+            height:44px;
+            line-height: 44px;
+            background: $blue;
+            color: #fff;
+            font-size: 20px;
+            border-radius: 2px;
+            &:hover{
+                cursor: pointer;
+            }
+
+        }
+    }
+}
+.dragArticle-add-caption{
+    display: none;
+    width: 752px;
+    height: 406px;
+    position: fixed;
+    top: 50%;
+    margin-top: -203px;
+    left: 50%;
+    margin-left: -376px;
+    background: #fff;
+    z-index: 9999;
+    .head{
+        height:73px;
+        line-height: 73px;
+        border-bottom: 1px solid #ccc;
+        font-size: 24px;
+        color: #333;
+        text-align: center;
+        position: relative;
+        .close{
+            position: absolute;
+            top:15px;
+            right:15px;
+            width:15px;
+        }
+    }
+    .content{
+        margin: 20px 40px 48px;
+        height: 180px;
+        width: 672px;
+        box-sizing: border-box;
+        border: 1px solid $blue;
+        border-radius: 2px;
+        padding: 10px;
+        .image{
+            width:180px;
+            height:160px;
+            background: #eee;
+            position: relative;
+        }
+        .rotate{
+            position: absolute;
+            top:0;
+            right:0;
+            width:100%;
+            height: 30px;
+            background: #000;
+            opacity: 0.5;
+        }
+        .rotate-text{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            color: #fff;
+            height: 30px;
+            text-align: right;
+            padding-right: 4px;
+            box-sizing: border-box;
+            img{
+                width:18px;
+                height:18px;
+                vertical-align: middle;
+            }
+            span{
+                vertical-align: middle;
+                margin-left: 5px;
+                height: 30px;
+                display: inline-block;
+                line-height: 30px;
+            }
+        }
+        img{
+            width:100%;
+        }
+        .describe{
+            width: 460px;
+            position: relative;
+            margin-left: 10px;
+            textarea{
+                height: 150px;
+                border: none;
+            }
+            .limit{
+                position: absolute;
+                top: 152px;
+                right: 0px;
+                font-size: 12px;
+                color: #999;
+            }
+
+        }
+        textarea{
+            width:100%;
+        }
+    }
+    .foot{
+        height:84px;
+        line-height: 84px;
+        background: #eee;
+        text-align: center;
+        span{
+            display: inline-block;
+            width:200px;
+            height:44px;
+            line-height: 44px;
+            background: $blue;
+            color: #fff;
+            font-size: 20px;
+            border-radius: 2px;
+            &:hover{
+                cursor: pointer;
+            }
+
+        }
+    }
+}
+

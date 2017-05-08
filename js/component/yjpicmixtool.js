@@ -22,8 +22,8 @@ Vue.component('yjpicmixtool-component', {
 		'			<p class="notice-big fl">拖拽可调整正文、图片顺序</p>' +
 		'			<p class="notice-small fl">支持jpg、png、bmp格式的图片，图片单张大小不超过20M，<br> 图片最小支持：320*800px，最大支持9999*9999px.' +
 		'			</p>' +
-		'			<a href="javascript:void(0);" @click="hideMixtool">关闭</a>' +
-		'			<a href="javascript:void(0);" @click="saveMixtool">保存</a>' +
+		'			<a href="javascript:void(0);" class="dragArticle-close" @click="hideMixtool">关闭</a>' +
+		'			<a href="javascript:void(0);" class="dragArticle-save" @click="saveMixtool">保存</a>' +
 		'		</div>' +
 		'		<div class="drag-con">' +
 		'			<ul class="clearfix gridly" v-show="tabSelected==pindex" v-for="(paragraph,pindex) in data.paragraphList" style="position: relative;">' +
@@ -157,7 +157,7 @@ Vue.component('yjpicmixtool-component', {
 				"width": "",
 				"height": ""
 			};
-
+			$(".dragArticle-add-content").show();
 			this.data.paragraphList[this.tabSelected].journeyContent.push(content);
 
 			console.log('add text');

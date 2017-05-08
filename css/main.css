@@ -692,6 +692,24 @@ input:focus {
     .dragArticle .journey-content .dragArticle-header .notice-big {
       color: #666;
       font-size: 28px; }
+    .dragArticle .journey-content .dragArticle-header .dragArticle-close {
+      width: 100px;
+      height: 40px;
+      border-radius: 2px;
+      line-height: 40px;
+      border: 1px solid #1A8CED;
+      color: #1A8CED;
+      display: inline-block;
+      text-align: center; }
+    .dragArticle .journey-content .dragArticle-header .dragArticle-save {
+      width: 100px;
+      height: 40px;
+      border-radius: 2px;
+      line-height: 40px;
+      background: #1A8CED;
+      color: #fff;
+      display: inline-block;
+      text-align: center; }
     .dragArticle .journey-content ul {
       overflow-y: scroll;
       height: 100%; }
@@ -702,7 +720,8 @@ input:focus {
         box-sizing: border-box;
         margin-right: 20px;
         color: #1A8CED;
-        position: relative; }
+        position: relative;
+        text-align: center; }
         .dragArticle .journey-content ul > a img {
           width: 50px;
           margin: 28px 38px 6px; }
@@ -730,7 +749,8 @@ input:focus {
           color: #fff;
           font-size: 18px;
           width: 100%;
-          line-height: 41px; }
+          line-height: 41px;
+          text-align: center; }
           .dragArticle .journey-content ul .dragArticle-item .update:after {
             content: '';
             width: 100%;
@@ -1030,8 +1050,9 @@ input:focus {
       height: 240px;
       overflow-y: scroll; }
     .tags-popup .popup-body .tag {
-      margin-bottom: 12px;
-      position: relative; }
+      margin-bottom: 10px;
+      position: relative;
+      padding-top: 2px; }
     .tags-popup .popup-body .tag.more {
       height: 56px; }
     .tags-popup .popup-body .tag-type {
@@ -1043,7 +1064,7 @@ input:focus {
       border-radius: 2px;
       position: absolute;
       top: 50%;
-      margin-top: -15px; }
+      margin-top: -18px; }
     .tags-popup .popup-body .tag-type.more {
       margin-top: 15px; }
     .tags-popup .popup-body .tag-name {
@@ -1088,10 +1109,163 @@ input:focus {
     border-radius: 2px;
     text-indent: 10px; }
 
-/*# sourceMappingURL=main.css.map */
+.dragArticle-add-content {
+  display: none;
+  width: 902px;
+  height: 520px;
+  position: fixed;
+  top: 50%;
+  margin-top: -260px;
+  left: 50%;
+  margin-left: -451px;
+  background: #fff;
+  z-index: 9999; }
+  .dragArticle-add-content .head {
+    height: 73px;
+    line-height: 73px;
+    border-bottom: 1px solid #ccc;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    position: relative; }
+    .dragArticle-add-content .head .close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 15px; }
+  .dragArticle-add-content .content {
+    padding: 20px 30px;
+    width: 100%;
+    height: 363px;
+    box-sizing: border-box;
+    position: relative; }
+    .dragArticle-add-content .content textarea {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #1A8CED;
+      border-radius: 2px;
+      padding: 6px;
+      box-sizing: border-box; }
+    .dragArticle-add-content .content span {
+      position: absolute;
+      bottom: 21px;
+      right: 35px;
+      font-size: 12px;
+      color: #999; }
+  .dragArticle-add-content .foot {
+    height: 84px;
+    line-height: 84px;
+    background: #eee;
+    text-align: center; }
+    .dragArticle-add-content .foot span {
+      display: inline-block;
+      width: 200px;
+      height: 44px;
+      line-height: 44px;
+      background: #1A8CED;
+      color: #fff;
+      font-size: 20px;
+      border-radius: 2px; }
+      .dragArticle-add-content .foot span:hover {
+        cursor: pointer; }
 
-/* 拖拽的样式 */
-.ui-state-highlight{
-  background:transparent;!important;
-  border: 2px dashed #fff;!important;
-}
+.dragArticle-add-caption {
+  display: none;
+  width: 752px;
+  height: 406px;
+  position: fixed;
+  top: 50%;
+  margin-top: -203px;
+  left: 50%;
+  margin-left: -376px;
+  background: #fff;
+  z-index: 9999; }
+  .dragArticle-add-caption .head {
+    height: 73px;
+    line-height: 73px;
+    border-bottom: 1px solid #ccc;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    position: relative; }
+    .dragArticle-add-caption .head .close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 15px; }
+  .dragArticle-add-caption .content {
+    margin: 20px 40px 48px;
+    height: 180px;
+    width: 672px;
+    box-sizing: border-box;
+    border: 1px solid #1A8CED;
+    border-radius: 2px;
+    padding: 10px; }
+    .dragArticle-add-caption .content .image {
+      width: 180px;
+      height: 160px;
+      background: #eee;
+      position: relative; }
+    .dragArticle-add-caption .content .rotate {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 30px;
+      background: #000;
+      opacity: 0.5; }
+    .dragArticle-add-caption .content .rotate-text {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      color: #fff;
+      height: 30px;
+      text-align: right;
+      padding-right: 4px;
+      box-sizing: border-box; }
+      .dragArticle-add-caption .content .rotate-text img {
+        width: 18px;
+        height: 18px;
+        vertical-align: middle; }
+      .dragArticle-add-caption .content .rotate-text span {
+        vertical-align: middle;
+        margin-left: 5px;
+        height: 30px;
+        display: inline-block;
+        line-height: 30px; }
+    .dragArticle-add-caption .content img {
+      width: 100%; }
+    .dragArticle-add-caption .content .describe {
+      width: 460px;
+      position: relative;
+      margin-left: 10px; }
+      .dragArticle-add-caption .content .describe textarea {
+        height: 150px;
+        border: none; }
+      .dragArticle-add-caption .content .describe .limit {
+        position: absolute;
+        top: 152px;
+        right: 0px;
+        font-size: 12px;
+        color: #999; }
+    .dragArticle-add-caption .content textarea {
+      width: 100%; }
+  .dragArticle-add-caption .foot {
+    height: 84px;
+    line-height: 84px;
+    background: #eee;
+    text-align: center; }
+    .dragArticle-add-caption .foot span {
+      display: inline-block;
+      width: 200px;
+      height: 44px;
+      line-height: 44px;
+      background: #1A8CED;
+      color: #fff;
+      font-size: 20px;
+      border-radius: 2px; }
+      .dragArticle-add-caption .foot span:hover {
+        cursor: pointer; }
+
+/*# sourceMappingURL=main.css.map */
