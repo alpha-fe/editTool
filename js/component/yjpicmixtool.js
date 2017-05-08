@@ -110,6 +110,7 @@ Vue.component('yjpicmixtool-component', {
 		 */
 		hideMixtool: function() {
 			var self = this;
+            $("html").removeClass("mfixed");
 			$(this.$el).animate({ width: 'toggle' }, function() {
 				self.$emit('childup', { isCreated: false });
 			});
@@ -144,6 +145,7 @@ Vue.component('yjpicmixtool-component', {
 			$(this.$el).animate({ width: 'toggle' }, function() {
 				self.$emit('childup', { isCreated: false, data: saveData });
 			});
+            $("html").removeClass("mfixed");
 		},
 		/**
 		 * 添加正文
@@ -158,6 +160,7 @@ Vue.component('yjpicmixtool-component', {
 				"height": ""
 			};
 			$(".dragArticle-add-content").show();
+			$("html").addClass("mfixed");
 			this.data.paragraphList[this.tabSelected].journeyContent.push(content);
 
 			console.log('add text');
@@ -174,6 +177,7 @@ Vue.component('yjpicmixtool-component', {
 		modifyComment: function() {
 			// todo:未作做
             $(".dragArticle-add-caption").show();
+            $("html").addClass("mfixed");
 		},
 		/**
 		 * 上传图片

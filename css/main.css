@@ -650,7 +650,6 @@ input:focus {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 8888;
   background: #fff;
   display: none; }
   .dragArticle .journey-catalog {
