@@ -385,4 +385,35 @@ var yjTools = {
 		window.console.log(JSON.stringify(nd));
 		return nd;
 	},
+	/**
+	 * 上传图片并旋转图片
+	 * @param {Object} item
+	 * @param {Object} scallback
+	 * @param {Object} ecallback
+	 */
+	imgRotateUpload: function(item,scallback,ecallback){
+        var picUrl = item.picUrl,
+            spinAngle = item.spinAngle;
+            
+        $.ajax({
+	        url: CONF.uploadpicWithRotateUrl,
+	        data:{ 	
+	        	picUrl:item.picUrl
+	        	,spinAngle:item.spinAngle
+	        },
+	        dataType: "json",
+	        type: "post",
+	        contenttype: "application/javascript;charset=utf-8",
+	        success: function (data) {
+				if(scallback){
+					scallback(data);
+				}
+	        },
+   			error: function (a, b) {
+  				if(ecallback){
+					ecallback(data);
+				}
+   			}
+        });
+    },
 };
