@@ -114,15 +114,15 @@
                             <span class="star">*</span>
                         </div>
                         <div class="tags">
-                            <div v-if="!paragraph.tagdict || paragraph.tagdict.length==0">
+                            <div v-if="!paragraph.journeyTagdict || paragraph.journeyTagdict.length==0">
                                 <a href="javascript:void(0);" @click="showTagsPopup(pindex,$event)">添加标签</a>
                                 <span>添加标签，有可能被加精哦～</span>
                             </div>
-                            <ul class="has-tags clearfix" v-if="paragraph.tagdict && paragraph.tagdict.length > 0">
-                                <li class="tag fl" v-for="tag in paragraph.tagdict">{{tag.text}}</li>
+                            <ul class="has-tags clearfix" v-if="paragraph.journeyTagdict && paragraph.journeyTagdict.length > 0">
+                                <li class="tag fl" v-for="tag in paragraph.journeyTagdict">{{tag.text}}</li>
                                 <li class="tag fl" id="updateTags" @click="showTagsPopup(pindex,$event)">修改标签</li>
                             </ul>
-                            <yjtapopup-component @childup="yjtagspop" v-if="hasTags===pindex" v-bind:index="pindex" v-bind:seltags="paragraph.tagdict"></yjtapopup-component>
+                            <yjtapopup-component @childup="yjtagspop" v-if="hasTags===pindex" v-bind:index="pindex" v-bind:seltags="paragraph.journeyTagdict"></yjtapopup-component>
 
                         </div>
                         <yjselect2-component v-bind:suggesturl='apiConfig.suggestUrl' v-bind:dest='paragraph.address' v-bind:destinfo='paragraph.addressInfo' v-bind:params='{"desc":"目的地","placeholder":"请输入目的地",defaultmaxlenth:30}'></yjselect2-component>
