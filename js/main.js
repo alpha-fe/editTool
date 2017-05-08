@@ -284,7 +284,8 @@ var mainVue = new Vue({
         	//去掉离开页面弹窗
            	window.removeEventListener("beforeunload", checkLeavePage);
            	window.removeEventListener("unload", checkLeavePage);
-           	
+           	$("html").addClass("mfixed")
+            $(".message-box").show();
             console.log('发布');
         }
     }
