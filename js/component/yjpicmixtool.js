@@ -9,7 +9,7 @@
  * Created by xujia on 2017/4/24.
  */
 Vue.component('yjpicmixtool-component', {
-	props: ["d"],
+	props: ["d","apiconfig"],
 	template: '' +
 		'<div v-if="data"  class="dragArticle clearfix" id="dragArticle">' +
 		'	<div class="journey-catalog">' +
@@ -37,6 +37,7 @@ Vue.component('yjpicmixtool-component', {
 		'						<p v-if="item.type==\'text\'" @click="modifyContent(jindex)" class="update"><span>修改正文</span><span class="bg-span"></span></p>' +
 		'						<yjmix-content-component v-if="showEditContent===jindex"  @childup="modifyContenCallback" v-bind:index="jindex"  v-bind:str="item.content" v-bind:params="{defaultmaxlenth:2000,title:\'修改正文\',type:2}"></yjmix-content-component>'+
 		'						<p v-if="item.type==\'img\'" @click="modifyComment(jindex)" class="update"><span>添加图注</span><span class="bg-span"></span></p>' +
+		'						<yjmix-img-component v-if="showEditComment===jindex" @childup="modifyCommentCallback" v-bind:index="jindex" v-bind:imgobj="item" v-bind:params="{defaultmaxlenth:2000,title:\'修改图注\',type:2}"></yjmix-img-component>'+
 		'						<input type=input style="display:none" :value="JSON.stringify(item)" />' +
 		'					</div>' +
 		'				</li>' +
@@ -50,12 +51,13 @@ Vue.component('yjpicmixtool-component', {
 		'					<img src="img/addImgIcon.png" alt="">' +
 		'					<span class="img-number">0/50</span>' +
 		'					<span class="text">添加图片</span>' +
-		'					<yjupload-component @childup="uploadimg" ></yjupload-component>'+
+		'					<yjupload-component @childup="uploadimg" v-bind:upurl="apiconfig.uploadpicUrl" ></yjupload-component>'+
 		'				</a>' +
 		'			</ul>' +
 		'		</div>' +
 		'	</div>' +
 		'	<yjmix-content-component @childup="addContentCallback" v-if="showAddContent" v-bind:params="{defaultmaxlenth:2000,title:\'添加正文\',type:1}"></yjmix-content-component>'+
+		'	<yjmix-img-component @childup="addCommentCallback" v-if="showAddComment" v-bind:imgobj="showAddCommentObj" v-bind:params="{defaultmaxlenth:2000,title:\'添加图注\',type:1}"></yjmix-img-component>'+
 		'</div>' +
 		'',
 	data: function() {
@@ -63,6 +65,9 @@ Vue.component('yjpicmixtool-component', {
 			init: false,
 			showAddContent:false,	// 添加正文
 			showEditContent:false,	// 修改正文
+			showAddComment:false,	// 添加图注
+			showEditComment:false,	// 修改图注
+			showAddCommentObj:"",	// 添加图注的对象
 			tabSelected: 0, // 选中的行程tabindex
 			tabJourneyOpRecord: [], // 操作日志，用于保存
 			tabJourneySorted: [], // 所有行程的正文图片的排序
@@ -153,10 +158,10 @@ Vue.component('yjpicmixtool-component', {
 		},
 		/**
 		 * 保存正文
-		 * @param {Object} content
+		 * @param {Object} r
 		 */
-		addContentCallback:function(obj){
-			if(obj.action == "close"){
+		addContentCallback:function(r){
+			if(r.action == "close"){
 				this.showAddContent = false;
 				return;
 			}
@@ -164,7 +169,7 @@ Vue.component('yjpicmixtool-component', {
 			var contentObj = {
 				"id": "",
 				"imgurl": "",
-				"content": obj.content,
+				"content": r.content,
 				"type": "text",
 				"width": "",
 				"height": ""
@@ -189,15 +194,15 @@ Vue.component('yjpicmixtool-component', {
 		},
 		/**
 		 * 修改正文
-		 * @param {Object} obj
+		 * @param {Object} r
 		 */
-		modifyContenCallback:function(obj){
-			if(obj.action == "close"){
+		modifyContenCallback:function(r){
+			if(r.action == "close"){
 				this.showEditContent = false;
 				return;
 			}
 			
-			this.data.paragraphList[this.tabSelected].journeyContent[obj.index].content = obj.content;
+			this.data.paragraphList[this.tabSelected].journeyContent[r.index].content = r.content;
 			this.showEditContent = false;
 		},
 		/**
@@ -211,19 +216,59 @@ Vue.component('yjpicmixtool-component', {
 			});
 		},
 		/**
+		 * 修改注解回调
+		 */
+		modifyCommentCallback:function(r){
+			if(r.action == "close"){
+				this.showEditComment = false;
+				return;
+			}
+			
+			var commentImg = this.data.paragraphList[this.tabSelected].journeyContent[r.index];
+			commentImg.content = r.img.content;
+			commentImg.imgurl = r.img.imgurl;
+			commentImg.width = r.img.width;
+			commentImg.height = r.img.height;
+			this.showEditComment = false;
+		},
+		/**
 		 * 修改注解
 		 */
-		modifyComment: function() {
-			// todo:未作做
-            $(".dragArticle-add-caption").show();
-            $("html").addClass("mfixed");
+		modifyComment: function(index) {
+			this.showEditComment = index;
+			Vue.nextTick(function(){
+				var popupEle = $(event.currentTarget).parents("div.dragArticle").find('.dragArticle-add-caption');
+			  	popupEle.show();
+			});
+		},
+		/**
+		 * 添加图注保存回调
+		 */
+		addCommentCallback:function(r){
+			if(r.action == "close"){
+				this.showAddComment = false;
+				this.showAddCommentObj = null;
+				return;
+			}
+			
+			var img = {
+				"id": "",
+				"imgurl": r.img.imgurl,
+				"content": r.img.content,
+				"type": "img",
+				"width": r.img.width,
+				"height": r.img.height
+			};
+			this.data.paragraphList[this.tabSelected].journeyContent.push(img);
+			this.showAddComment = false;
+			this.showAddCommentObj = null;
+	
 		},
 		/**
 		 * 上传图片
 		 * @param {Object} r
 		 */
 		uploadimg:function(r){
-//			window.console.log(JSON.stringify(r));
 			if(r.code != 0){
 				alert("上传错误");
 				return;
@@ -231,16 +276,20 @@ Vue.component('yjpicmixtool-component', {
 			
 			var img = {
 				"id": "",
-				"imgurl": "",
+				"imgurl": r.result,
 				"content": "",
 				"type": "img",
-				"width": "",
-				"height": ""
+				"width": r.width,
+				"height": r.height
 			};
-			img.imgurl = r.result;
-			this.data.paragraphList[this.tabSelected].journeyContent.push(img);
 
-//			console.log('add img')
+			this.showAddComment = true;
+			this.showAddCommentObj = img;
+			Vue.nextTick(function(){
+				var popupEle = $("div.dragArticle").find('.dragArticle-add-caption');
+			  	popupEle.show();
+//          	$("html").addClass("mfixed");
+			});
 		},
 		/**
 		 * 添加图片
@@ -250,6 +299,7 @@ Vue.component('yjpicmixtool-component', {
 			$uploadinput.click();
 	
 		},
+		
 		/**
 		 * 删除某个正文或图注
 		 * @param {Object} index

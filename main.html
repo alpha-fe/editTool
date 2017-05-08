@@ -210,7 +210,7 @@
         </div>
 
         <!-- start -->
-        <yjpicmixtool-component v-if="showYjpicmixtool" @childup="yjpicmixtool"  v-bind:d='yjData.paragraphInfo[0]' ></yjpicmixtool-component>
+        <yjpicmixtool-component v-if="showYjpicmixtool" @childup="yjpicmixtool" v-bind:apiconfig="apiConfig" v-bind:d='yjData.paragraphInfo[0]' ></yjpicmixtool-component>
         <!-- end -->
         <div class="shadow" id="shadow"></div>
     </div>
@@ -266,6 +266,7 @@
 <script type="text/javascript" src="js/component/yjtextarea.js"></script>
 <script type="text/javascript" src="js/component/yjcatalog.js"></script>
 <script type="text/javascript" src="js/component/yjpicmixtool_content.js"></script>
+<script type="text/javascript" src="js/component/yjpicmixtool_img.js"></script>
 <script type="text/javascript" src="js/component/yjpicmixtool.js"></script>
 <script type="text/javascript" src="js/component/yjtagpopup.js"></script>
 <script type="text/javascript" src="js/component/yjmessagepopup.js"></script>
