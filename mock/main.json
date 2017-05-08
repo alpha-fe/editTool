@@ -7,12 +7,12 @@
     "destination": "北京市",
     "destinationInfo": "39.911013,116.413554"
   },
-  "paragraphInfo": {
+  "paragraphInfo": [{
     "id": "",
     "dayNum": "",
     "paragraphList": [
       {
-        "journeyId": "0",
+        "id": "0",
         "journeyTitle": "行程1",
         "address": "长春",
         "addressInfo": "",
@@ -49,7 +49,7 @@
         ]
       },
       {
-        "journeyId": "0",
+        "id": "0",
         "journeyTitle": "行程2",
         "address": "吉林",
         "addressInfo": "",
@@ -78,5 +78,5 @@
         ]
       }
     ]
-  }
+  }]
 }

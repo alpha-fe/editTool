@@ -12,10 +12,9 @@
  * Created by xujia on 2017/4/23.
  */
 Vue.component('yjupload-component', {
-	props: ['index'],
+	props: ['index','upurl'],
 	data: function() {
 		return {
-			serverUrl: "http://127.0.0.1:808",
 			singleUpPath: null,
 			upStatus: false,
 			uploadLoaded: 0,
@@ -40,7 +39,7 @@ Vue.component('yjupload-component', {
 			var self = this;
 			var $modal = $('#progressModal');
 			$(input).fileupload({
-				url: self.serverUrl + "/upload/uploadpic.do",
+				url: self.upurl,
 				sequentialUploads: true,
 				xhrFields: {
 					withCredentials: true

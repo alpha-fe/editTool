@@ -2,35 +2,112 @@ var baseData = {};
 var mainVue = new Vue({
     el: '#app',
     data: {
+    	apiConfig : {},
         isReady:false,			// 获取到json数据后设置为true
         showYjpicmixtool:false,	// 每次关闭图文混排都销毁组件
         hasTags: false,			// true:显示修改标签 false:添加标签
         yjData:{},				// 游记数据
-        queryParams:[]			// query参数
+      	enterType:enterType		// 进入类型 0 发表游记 1 编辑 2 续写 3从草稿进入
     },
     created: function() {
-//  	// 获取url参数
-    	this.queryParams = utils.getQueryParams();
-    	
-//		$.ajaxSettings.async = true;
         self = this;
-        $.getJSON("mock/main.json", function(data) {
-            self.yjData = data;
-            self.isReady = true;
-        });
+        this.apiConfig = CONF;
+		// 勿删除 todo: 初始化方法
+//		this.initByCreated();
         
-
+        //  test
+        $.getJSON("mock/main.json", function(data) {
+            	self.yjData = data;
+            	self.isReady = true;
+	    });
+   
     },
     mounted: function() {
-
-
+    	
+		this.initByMounted();
     },
     methods: {
     	/**
-    	 * 游记老数据转换为新数据
+    	 * mounted事件中的初始化
     	 */
-    	oldConverToNew:function(){
-    		// 首先判断有无
+    	initByCreated:function(){
+    		self = this;
+    		var tripId = queryParams['tripId'];
+	        if(yjDraftData == null){
+	        	if(enterType == 0){ // 新游记
+	        		$.getJSON("mock/new_empty.json", function(data) {
+	            		self.yjData = data;
+	            		self.isReady = true;
+		        	});
+		        	
+	        	}else if(enterType == 1){	// 编辑
+	        		// http://xujia.autohome.com.cn/editTool/main.html?tripId=53531&travelStatus=detail 测试编辑数据
+	        		yjTools.getTravelById(tripId,function(data){
+	        			if (data && data.returncode == 0) {
+		                    self.yjData = yjTools.oldConvertToNew(data.result);
+		                }else{
+		                	
+		                }
+	        			self.isReady = true;
+	        		});
+	        		
+	        	}else if(enterType == 2){	// 续写
+	        		// http://xujia.autohome.com.cn/editTool/main.html?tripId=53531&travelStatus=detail&c=0 测试续写数据
+	        		yjTools.getTravelById(tripId,function(data){
+	        			if (data && data.returncode == 0) {
+		                    self.yjData = yjTools.oldConvertToNew(data.result);
+		                }else{
+		                	
+		                }
+	        			self.isReady = true;
+	        		});
+	        	}else if(enterType == 3){	// 草稿
+	        		// http://xujia.autohome.com.cn/editTool/main.html?tripId=54565 测试草稿数据
+	        		yjTools.getNewDraftTravelNote(tripId,function(data){
+	        			if (data && data.returncode == 0) {
+		                    self.yjData = yjTools.oldConvertToNew(data.result);
+		                }else{
+		                	
+		                }
+	        			self.isReady = true;
+	        		});
+	        	}
+	
+	        }else{
+	    	 	self.yjData = yjDraftData;
+	        	self.isReady = true;
+	        }
+	        
+	        if(typeof self.yjData.paragraphInfo === "undefined" 
+	        	|| self.yjData.paragraphInfo == null 
+	        	|| self.yjData.paragraphInfo.length == 0){
+	        	self.yjData.paragraphInfo = [{
+										        "id": "",
+										        "journeyTitle": "",
+										        "address": "",
+										        "addressInfo": "",
+										        "startCost": 0,
+										        "endCost": 0,
+										        "startTime": "",
+										        "tagdict": [],
+										        "journeyContent": [
+										          {
+										            "id": "0",
+										            "imgurl": "",
+										            "content": "",
+										            "type": "",
+										            "width": "",
+										            "height": ""
+										          }
+										        ]
+										      }];
+	        }
+    	},
+    	/**
+    	 * mounted事件中的初始化
+    	 */
+    	initByMounted:function(){
+    		
     	},
     	/**
     	 * 页面打开时草稿的校验
@@ -184,6 +261,10 @@ var mainVue = new Vue({
          * 手动保存草稿
          */
         manualSaveNote: function() {
+        	var yjdraftData = this.yjData;
+        	yjTools.saveDraftToServer(yjdraftData,function(data){
+        		layer.alert("保存成功");
+        	})
             console.log('手动保存草稿');
         },
         /**

@@ -6,13 +6,11 @@
  *  依赖：vue2.0,jquery，jquery-ui
  * 	支持：ie10+,firfox,chorme
  * 
- *  使用示例：
- *  <yjselect2-component v-bind:params='{css:"fl",domain:"http://you.autohome.com.cn",requestUrl:"/commonexternal/getsuggestplace.do",selectedValue:"selectedValue",destination:"selectedText",destinationInfo:"selectedTextAuto"}' ></yjselect2-component>
  *
  * Created by xujia on 2017/4/16.
  */
 Vue.component('yjselect2-component', {
-	props: ["params","dest","destinfo"],
+	props: ["params","dest","destinfo","suggesturl"],
 	template: '#yjselect2',
 	data: function() {
 		return {
@@ -64,7 +62,7 @@ Vue.component('yjselect2-component', {
 	},
 	mounted: function() {
 //		console.log('已经挂载到模板上:msg变量渲染到模板');
-		var url = this.params.domain + this.params.requestUrl;
+		var url = this.suggesturl;
 //		console.log(url);
 		var _self = this;
 		var inputDom = this.$el.getElementsByTagName('input');
