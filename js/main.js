@@ -4,6 +4,7 @@ var mainVue = new Vue({
     data: {
     	apiConfig : {},
         isReady:false,			// 获取到json数据后设置为true
+        isRender:true,
         showYjpicmixtool:false,	// 每次关闭图文混排都销毁组件
         hasTags: false,			// true:显示修改标签 false:添加标签
         yjData:{},				// 游记数据
@@ -238,6 +239,7 @@ var mainVue = new Vue({
          */
         showDragArticle:function() {
             this.showYjpicmixtool = true;
+            window.console.log(JSON.stringify(this.yjData));
             Vue.nextTick(function() {
                 $(".dragArticle").animate({width: 'toggle'});
             })
@@ -247,9 +249,25 @@ var mainVue = new Vue({
          * @param {Object} r
          */
         yjpicmixtool:function(r){
-            this.showYjpicmixtool = false;
-            if(r.data) // 数据返回时 保存数据
-                this.yjData.paragraphInfo[0] = r.data;
+        	if(r.action == "close"){
+        		this.showYjpicmixtool = false;
+        		Vue.nextTick(function() {
+                	$(".dragArticle").animate({width: 'toggle'});
+            	})
+        		return;
+        	}
+        	this.isRender = false;
+        	if(r.data){
+				this.yjData.paragraphInfo[0] = r.data;
+           }
+            this.isRender = true;
+            
+			this.showYjpicmixtool = false;
+    		Vue.nextTick(function() {
+            	$(".dragArticle").animate({width: 'toggle'});
+        	})
+          
+            window.console.log(JSON.stringify(this.yjData));
         },
         /**
          * 自动保存草稿

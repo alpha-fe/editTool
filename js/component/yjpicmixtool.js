@@ -34,8 +34,9 @@ Vue.component('yjpicmixtool-component', {
 		'						<a href="javascript:void(0);" @click="del(jindex,$event)" class="del-icon">' +
 		'							<img src="img/deleteIcon-white.png" alt=""><span></span>' +
 		'						</a>' +
-		'						<p v-if="item.type==\'text\'" @click="modifyContent" class="update"><span>修改正文</span><span class="bg-span"></span></p>' +
-		'						<p v-if="item.type==\'img\'" @click="modifyComment" class="update"><span>添加图注</span><span class="bg-span"></span></p>' +
+		'						<p v-if="item.type==\'text\'" @click="modifyContent(jindex)" class="update"><span>修改正文</span><span class="bg-span"></span></p>' +
+		'						<yjmix-content-component v-if="showEditContent===jindex"  @childup="modifyContenCallback" v-bind:index="jindex"  v-bind:str="item.content" v-bind:params="{defaultmaxlenth:2000,title:\'修改正文\',type:2}"></yjmix-content-component>'+
+		'						<p v-if="item.type==\'img\'" @click="modifyComment(jindex)" class="update"><span>添加图注</span><span class="bg-span"></span></p>' +
 		'						<input type=input style="display:none" :value="JSON.stringify(item)" />' +
 		'					</div>' +
 		'				</li>' +
@@ -54,11 +55,14 @@ Vue.component('yjpicmixtool-component', {
 		'			</ul>' +
 		'		</div>' +
 		'	</div>' +
+		'	<yjmix-content-component @childup="addContentCallback" v-if="showAddContent" v-bind:params="{defaultmaxlenth:2000,title:\'添加正文\',type:1}"></yjmix-content-component>'+
 		'</div>' +
 		'',
 	data: function() {
 		return {
 			init: false,
+			showAddContent:false,	// 添加正文
+			showEditContent:false,	// 修改正文
 			tabSelected: 0, // 选中的行程tabindex
 			tabJourneyOpRecord: [], // 操作日志，用于保存
 			tabJourneySorted: [], // 所有行程的正文图片的排序
@@ -110,9 +114,9 @@ Vue.component('yjpicmixtool-component', {
 		 */
 		hideMixtool: function() {
 			var self = this;
-            $("html").removeClass("mfixed");
+			$("html").removeClass("mfixed");
 			$(this.$el).animate({ width: 'toggle' }, function() {
-				self.$emit('childup', { isCreated: false });
+				self.$emit('childup', { action:"close" });
 			});
 		},
 		/**
@@ -143,33 +147,68 @@ Vue.component('yjpicmixtool-component', {
 			// 保存后的数据顺序
 			window.console.log("保存后:" + JSON.stringify(saveData));
 			$(this.$el).animate({ width: 'toggle' }, function() {
-				self.$emit('childup', { isCreated: false, data: saveData });
+				self.$emit('childup', { action:"save" , data: saveData });
 			});
-            $("html").removeClass("mfixed");
+			$("html").removeClass("mfixed");
+		},
+		/**
+		 * 保存正文
+		 * @param {Object} content
+		 */
+		addContentCallback:function(obj){
+			if(obj.action == "close"){
+				this.showAddContent = false;
+				return;
+			}
+			
+			var contentObj = {
+				"id": "",
+				"imgurl": "",
+				"content": obj.content,
+				"type": "text",
+				"width": "",
+				"height": ""
+			};	
+			this.data.paragraphList[this.tabSelected].journeyContent.push(contentObj);
+			this.showAddContent = false;
 		},
 		/**
 		 * 添加正文
 		 */
-		addContent: function() {
-			var content = {
-				"id": "",
-				"imgurl": "",
-				"content": "testtest",
-				"type": "text",
-				"width": "",
-				"height": ""
-			};
-			$(".dragArticle-add-content").show();
-			$("html").addClass("mfixed");
-			this.data.paragraphList[this.tabSelected].journeyContent.push(content);
+		addContent: function(event) {
+			var self = this;
+			this.showAddContent = true;
+			 Vue.nextTick(function() {
+			 	var popupEle = $(event.currentTarget).parents("div.dragArticle").find('.dragArticle-add-content');
+			  	popupEle.show();
+//				$(".dragArticle-add-content").show();
+//			  	$("html").addClass("mfixed");
+			 });
 
 			console.log('add text');
 		},
 		/**
 		 * 修改正文
+		 * @param {Object} obj
 		 */
-		modifyContent: function() {
-			// todo:未做
+		modifyContenCallback:function(obj){
+			if(obj.action == "close"){
+				this.showEditContent = false;
+				return;
+			}
+			
+			this.data.paragraphList[this.tabSelected].journeyContent[obj.index].content = obj.content;
+			this.showEditContent = false;
+		},
+		/**
+		 * 修改正文
+		 */
+		modifyContent: function(index) {
+			this.showEditContent = index;
+			Vue.nextTick(function(){
+				var popupEle = $(event.currentTarget).parents("div.dragArticle").find('.dragArticle-add-content');
+			  	popupEle.show();
+			});
 		},
 		/**
 		 * 修改注解
