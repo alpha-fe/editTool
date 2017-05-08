@@ -15,7 +15,9 @@ if(!isProduct){
 		// 上传图片uploadpicUrl
 		"uploadpicUrl":"http://xujia.autohome.com.cn/upload/uploadpic.do",
 		// 目的地搜索
-		"suggestUrl":"http://xujia.autohome.com.cn/commonexternal/getsuggestplace.do"
+		"suggestUrl":"http://xujia.autohome.com.cn/commonexternal/getsuggestplace.do",
+		// 图片旋转
+		"uploadpicWithRotateUrl":"http://xujia.autohome.com.cn/upload/uploadpicForUrl"
 	};
 }else{
 	CONF = {
@@ -32,7 +34,9 @@ if(!isProduct){
 		// 上传图片uploadpicUrl
 		"uploadpicUrl":"http://you.autohome.com.cn/upload/uploadpic.do",
 		// 目的地搜索
-		"suggestUrl":"http://you.autohome.com.cn/commonexternal/getsuggestplace.do"
+		"suggestUrl":"http://you.autohome.com.cn/commonexternal/getsuggestplace.do",
+		// 图片旋转
+		"uploadpicWithRotateUrl":"http://you.autohome.com.cn/upload/uploadpicForUrl"
 	};
 
 }
