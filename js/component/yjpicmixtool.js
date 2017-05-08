@@ -29,13 +29,13 @@ Vue.component('yjpicmixtool-component', {
 		'			<ul class="clearfix gridly" v-show="tabSelected==pindex" v-for="(paragraph,pindex) in data.paragraphList" style="position: relative;">' +
 		'				<li v-for="(item,jindex) in paragraph.journeyContent" :id="\'\'+pindex+jindex" :mid="jindex" class="dragArticle-item fl">' +
 		'					<div class="brick small">' +
-		'						<img v-if="item.type==\'img\'" :src="item.imgurl" alt="">' +
-		'						<img v-if="item.type==\'text\'" src="" alt="">' +
+		'						<img class="img" v-if="item.type==\'img\'" :src="item.imgurl" alt="">' +
+		'						<img v-if="item.type==\'text\'" src="img/updateContent.png" alt="">' +
 		'						<a href="javascript:void(0);" @click="del(jindex,$event)" class="del-icon">' +
-		'							<img src="img/deleteIcon-white.png" alt="">' +
+		'							<img src="img/deleteIcon-white.png" alt=""><span></span>' +
 		'						</a>' +
-		'						<p v-if="item.type==\'text\'" @click="modifyContent" class="update">修改正文</p>' +
-		'						<p v-if="item.type==\'img\'" @click="modifyComment" class="update">添加图注</p>' +
+		'						<p v-if="item.type==\'text\'" @click="modifyContent" class="update"><span>修改正文</span><span class="bg-span"></span></p>' +
+		'						<p v-if="item.type==\'img\'" @click="modifyComment" class="update"><span>添加图注</span><span class="bg-span"></span></p>' +
 		'						<input type=input style="display:none" :value="JSON.stringify(item)" />' +
 		'					</div>' +
 		'				</li>' +
@@ -173,6 +173,7 @@ Vue.component('yjpicmixtool-component', {
 		 */
 		modifyComment: function() {
 			// todo:未作做
+            $(".dragArticle-add-caption").show();
 		},
 		/**
 		 * 上传图片

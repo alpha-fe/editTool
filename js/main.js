@@ -149,11 +149,11 @@ var mainVue = new Vue({
             };
             if(typeof(pindex) == "undefined"){
 
-                this.yjData.paragraphInfo.paragraphList.push(journey);
+                this.yjData.paragraphInfo[0].paragraphList.push(journey);
 
             }else{
 
-                this.yjData.paragraphInfo.paragraphList.splice(pindex,0,journey);
+                this.yjData.paragraphInfo[0].paragraphList.splice(pindex,0,journey);
 
             }
         },
@@ -161,7 +161,7 @@ var mainVue = new Vue({
          * 删除行程
          */
         delJourney:function(pindex){
-            this.yjData.paragraphInfo.paragraphList.splice(pindex,1);
+            this.yjData.paragraphInfo[0].paragraphList.splice(pindex,1);
         },
         /**
          * 添加正文
@@ -175,7 +175,7 @@ var mainVue = new Vue({
                 width: "750",
                 height: "500"
             };
-            this.yjData.paragraphInfo.paragraphList[index].journeyContent.push(content);
+            this.yjData.paragraphInfo[0].paragraphList[index].journeyContent.push(content);
         },
         /**
          * 上传图片后的回掉
@@ -197,7 +197,7 @@ var mainVue = new Vue({
          */
         deleteItem:function(pindex,jindex){
 
-            this.yjData.paragraphInfo.paragraphList[pindex].journeyContent.splice(jindex,1);
+            this.yjData.paragraphInfo[0].paragraphList[pindex].journeyContent.splice(jindex,1);
         },
         /**
          * 添加标签
@@ -229,7 +229,7 @@ var mainVue = new Vue({
             if(r.data){
                 var index = r.data.index;
                 var tagdict = r.data.tagdict;
-                this.yjData.paragraphInfo.paragraphList[index].tagdict = tagdict;
+                this.yjData.paragraphInfo[0].paragraphList[index].tagdict = tagdict;
             }
 
         },
@@ -249,7 +249,7 @@ var mainVue = new Vue({
         yjpicmixtool:function(r){
             this.showYjpicmixtool = false;
             if(r.data) // 数据返回时 保存数据
-                this.yjData.paragraphInfo = r.data;
+                this.yjData.paragraphInfo[0] = r.data;
         },
         /**
          * 自动保存草稿

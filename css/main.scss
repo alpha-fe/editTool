@@ -542,15 +542,12 @@ input:focus{
         margin-left:16px;
         width:292px;
         .feedback{
-            border:2px solid #F58833;
-            width:100%;
-            height:120px;
-            padding:6px;
-            border-radius: 2px;
-            box-sizing:border-box;
-            .imgbox{
-                background: url("../img/feedback.png") no-repeat;
-                background-size: 100% 100%;
+            background: url("../img/feedback.png") no-repeat;
+            background-size: 100% 100%;
+            width: 100%;
+            height: 120px;
+            a{
+                display: inline-block;
                 width: 100%;
                 height: 100%;
             }
@@ -802,7 +799,6 @@ input:focus{
 
     }
     .journey-content{
-        width:100%;
         margin-left:195px;
         padding:40px;
         position:relative;
@@ -823,6 +819,11 @@ input:focus{
             box-sizing:border-box;
         }
         .dragArticle-header{
+            position: relative;
+            .notice-small{
+                width: 230px;
+                margin-left: 50px;
+            }
             .notice-big{
                 color: #666;
                 font-size: 28px;
@@ -833,10 +834,14 @@ input:focus{
                 height: 40px;
                 border-radius: 2px;
                 line-height: 40px;
-                border: 1px solid $blue;
+                border: 1px solid #1A8CED;
                 color: $blue;
                 display: inline-block;
                 text-align: center;
+                position: absolute;
+                top: 0;
+                right: 120px;
+                box-sizing: border-box;
             }
             .dragArticle-save{
                 width: 100px;
@@ -847,6 +852,9 @@ input:focus{
                 color: #fff;
                 display: inline-block;
                 text-align: center;
+                position: absolute;
+                top: 0;
+                right: 0;
             }
         }
         ul{
@@ -881,9 +889,9 @@ input:focus{
                 margin-right:20px;
                 margin-bottom: 20px;
                 position: relative;
-                >img{
-                    width:100%;
-                    height:100%;
+                .img{
+                    width: 126px;
+                    height: 126px;
                 }
                 .update{
                     height: 41px;
@@ -895,16 +903,22 @@ input:focus{
                     width: 100%;
                     line-height: 41px;
                     text-align: center;
-                    &:after{
-                        content: '';
-                        width:100%;
-                        height:100%;
-                        background:#1B1B1B;
-                        opacity: 0.7;
+                    &:hover{
+                        cursor: pointer;
+                    }
+                    span{
+                        width: 100%;
+                        height: 100%;
                         position: absolute;
-                        top:0;
-                        left:0;
-                        z-index: -9;
+                        top: 0;
+                        left: 0;
+                        color: #fff;
+                        z-index: 9;
+                    }
+                    span.bg-span{
+                        background: #000;
+                        opacity: 0.7;
+                        z-index: 0;
                     }
                 }
             }
@@ -915,11 +929,13 @@ input:focus{
                 width:23px;
                 height:23px;
                 img{
-                    width:13px;
-                    margin-top:4px;
+                    width: 13px;
+                    position: absolute;
+                    top: 5px;
+                    left: 5px;
+                    z-index: 9;
                 }
-                &:after{
-                    content: '';
+                span{
                     width:100%;
                     height:100%;
                     background:#1B1B1B;

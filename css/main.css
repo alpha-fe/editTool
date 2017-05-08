@@ -446,15 +446,12 @@ input:focus {
     margin-left: 16px;
     width: 292px; }
     .content .right .feedback {
-      border: 2px solid #F58833;
+      background: url("../img/feedback.png") no-repeat;
+      background-size: 100% 100%;
       width: 100%;
-      height: 120px;
-      padding: 6px;
-      border-radius: 2px;
-      box-sizing: border-box; }
-      .content .right .feedback .imgbox {
-        background: url("../img/feedback.png") no-repeat;
-        background-size: 100% 100%;
+      height: 120px; }
+      .content .right .feedback a {
+        display: inline-block;
         width: 100%;
         height: 100%; }
     .content .right .catalog-article {
@@ -670,7 +667,6 @@ input:focus {
         border-radius: 2px;
         z-index: -9; }
   .dragArticle .journey-content {
-    width: 100%;
     margin-left: 195px;
     padding: 40px;
     position: relative;
@@ -689,27 +685,39 @@ input:focus {
       border-radius: 2px;
       z-index: -9;
       box-sizing: border-box; }
-    .dragArticle .journey-content .dragArticle-header .notice-big {
-      color: #666;
-      font-size: 28px; }
-    .dragArticle .journey-content .dragArticle-header .dragArticle-close {
-      width: 100px;
-      height: 40px;
-      border-radius: 2px;
-      line-height: 40px;
-      border: 1px solid #1A8CED;
-      color: #1A8CED;
-      display: inline-block;
-      text-align: center; }
-    .dragArticle .journey-content .dragArticle-header .dragArticle-save {
-      width: 100px;
-      height: 40px;
-      border-radius: 2px;
-      line-height: 40px;
-      background: #1A8CED;
-      color: #fff;
-      display: inline-block;
-      text-align: center; }
+    .dragArticle .journey-content .dragArticle-header {
+      position: relative; }
+      .dragArticle .journey-content .dragArticle-header .notice-small {
+        width: 230px;
+        margin-left: 50px; }
+      .dragArticle .journey-content .dragArticle-header .notice-big {
+        color: #666;
+        font-size: 28px; }
+      .dragArticle .journey-content .dragArticle-header .dragArticle-close {
+        width: 100px;
+        height: 40px;
+        border-radius: 2px;
+        line-height: 40px;
+        border: 1px solid #1A8CED;
+        color: #1A8CED;
+        display: inline-block;
+        text-align: center;
+        position: absolute;
+        top: 0;
+        right: 120px;
+        box-sizing: border-box; }
+      .dragArticle .journey-content .dragArticle-header .dragArticle-save {
+        width: 100px;
+        height: 40px;
+        border-radius: 2px;
+        line-height: 40px;
+        background: #1A8CED;
+        color: #fff;
+        display: inline-block;
+        text-align: center;
+        position: absolute;
+        top: 0;
+        right: 0; }
     .dragArticle .journey-content ul {
       overflow-y: scroll;
       height: 100%; }
@@ -738,9 +746,9 @@ input:focus {
         margin-right: 20px;
         margin-bottom: 20px;
         position: relative; }
-        .dragArticle .journey-content ul .dragArticle-item > img {
-          width: 100%;
-          height: 100%; }
+        .dragArticle .journey-content ul .dragArticle-item .img {
+          width: 126px;
+          height: 126px; }
         .dragArticle .journey-content ul .dragArticle-item .update {
           height: 41px;
           position: absolute;
@@ -751,16 +759,20 @@ input:focus {
           width: 100%;
           line-height: 41px;
           text-align: center; }
-          .dragArticle .journey-content ul .dragArticle-item .update:after {
-            content: '';
+          .dragArticle .journey-content ul .dragArticle-item .update:hover {
+            cursor: pointer; }
+          .dragArticle .journey-content ul .dragArticle-item .update span {
             width: 100%;
             height: 100%;
-            background: #1B1B1B;
-            opacity: 0.7;
             position: absolute;
             top: 0;
             left: 0;
-            z-index: -9; }
+            color: #fff;
+            z-index: 9; }
+          .dragArticle .journey-content ul .dragArticle-item .update span.bg-span {
+            background: #000;
+            opacity: 0.7;
+            z-index: 0; }
       .dragArticle .journey-content ul .del-icon {
         position: absolute;
         top: 0;
@@ -769,9 +781,11 @@ input:focus {
         height: 23px; }
         .dragArticle .journey-content ul .del-icon img {
           width: 13px;
-          margin-top: 4px; }
-        .dragArticle .journey-content ul .del-icon:after {
-          content: '';
+          position: absolute;
+          top: 5px;
+          left: 5px;
+          z-index: 9; }
+        .dragArticle .journey-content ul .del-icon span {
           width: 100%;
           height: 100%;
           background: #1B1B1B;
