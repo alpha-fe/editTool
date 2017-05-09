@@ -18,7 +18,7 @@ var mainVue = new Vue({
     created: function() {
         self = this;
         this.apiConfig = CONF;
-		// 勿删除 todo: 初始化方法
+		// 初始化方法
 		this.initByCreated();
         
         //  test
@@ -450,9 +450,28 @@ var mainVue = new Vue({
         	//去掉离开页面弹窗
            	window.removeEventListener("beforeunload", checkLeavePage);
            	window.removeEventListener("unload", checkLeavePage);
+//         	var yjdraftData = this.yjData;
+//         	yjTools.publishNoteToServer(yjDraftData,function(data){
+//         		if(data){
+//         			if (data.returncode == 0) {
+//              
+//	                    localDataTool.ckearDraft();
+//	                    popup.showPubSuccess();
+//	                }else if (data.returncode == 2 || data.returncode == 1){
+//	                
+//	                    yjTools.saveLocalDraftByUserId(userId,yjDraftData);
+//	                    popup.showMsg("发布失败："+data.message);
+//	                }
+//	                else {
+//	                 
+//	                    yjTools.saveLocalDraftByUserId(userId,yjDraftData);
+//	                    popup.showMsg(yjTools.PUBLISH_FAIL);
+//	                }
+//         		}
+//         	});
            	$("html").addClass("mfixed")
             $(".message-box").show();
-            console.log('发布');
+
         }
     }
 })

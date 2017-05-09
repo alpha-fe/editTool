@@ -1,4 +1,21 @@
 var utils = {
+
+	/**
+	 * 封面图正在上传当中，请稍后!
+	 */
+    COVER_UPLOADING_MSG:"封面图正在上传当中，请稍后!",
+    /**
+     * 保存草稿失败，请稍后再试!
+     */
+    SAVE_FAIL:"保存草稿失败，请稍后再试!",
+    /**
+     * 预览失败，请稍后再试!
+     */
+    PREVER_FAIL:"预览失败，请稍后再试!",
+    /**
+     * 发布失败，请稍后再试!
+     */
+    PUBLISH_FAIL:"发布失败，请稍后再试!",
 	/**
 	 * 上传图片类型种类
 	 */
@@ -192,7 +209,7 @@ var yjTools = {
      * 获取已发布游记
      * @param {Object} travelId
      */
-    getTravelById: function (travelId,scallback) {
+    getTravelById: function (travelId,scallback,ecallback) {
         if (typeof travelId == "undefined" || travelId == "") {
             return;
         }
@@ -210,7 +227,9 @@ var yjTools = {
             	}
             },
             error: function (a, b) {
-                console.log(a);
+            	if(ecallback){
+            		ecallback(a,b);
+            	}
             }
         });
         return result;
@@ -219,7 +238,7 @@ var yjTools = {
      * 获取远程草稿
      * @param {Object} tripId
      */
-    getNewDraftTravelNote: function (tripId,scallback) {
+    getNewDraftTravelNote: function (tripId,scallback,ecallback) {
         if (typeof tripId == "undefined" || tripId == "") {
             return;
         }
@@ -238,8 +257,9 @@ var yjTools = {
             	}
             },
             error: function (a, b) {
-                console.log(a);
-                //return ""
+            	if(ecallback){
+            		ecallback(a,b);
+            	}
             }
         });
         return result;
@@ -247,7 +267,7 @@ var yjTools = {
     /**
      * 保存草稿至服务端
      */
-    saveDraftToServer:function(draftData,scallback) {
+    saveDraftToServer:function(draftData,scallback,ecallback) {
         var jsonData = JSON.stringify(draftData);
         $.ajax({
             url: CONF.draftSaveUrl,
@@ -262,6 +282,33 @@ var yjTools = {
             	}
             },
             error: function (a, b) {
+            	if(ecallback){
+            		ecallback(a,b);
+            	}
+            }
+        });
+    },
+     /**
+     * 发布游记至服务端
+     */
+    publishNoteToServer:function(noteData,scallback,ecallback) {
+        var jsonData = JSON.stringify(noteData);
+        $.ajax({
+            url: CONF.publishNoteUrl,
+            dataType: "json",
+            type: "post",
+            async:"true",
+            contenttype: "application/javascript;charset=utf-8",
+            data: { jsonData: $.toJSON(jsonData) },
+            success: function (data) {
+				if(scallback){
+            		scallback(data);
+            	}
+            },
+            error: function (a, b) {
+            	if(ecallback){
+            		ecallback(a,b);
+            	}
             }
         });
     },

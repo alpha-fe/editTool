@@ -3,7 +3,9 @@ var CONF = {};
 if(!isProduct){
 	CONF = {
 		// 游记服务器地址
-		"serverUrl":"http://you.autohome.com.cn",
+		"serverUrl":"http://xujia.autohome.com.cn",
+		// 发布游记
+		"publishNoteUrl":"http://xujia.autohome.com.cn/tripnote/pc/publishnote",
 		// 获取游记信息
 		"tripnoteGetUrl":"http://xujia.autohome.com.cn/tripnote/gettripnotebyidforpc",
 		// 获取草稿
@@ -23,6 +25,8 @@ if(!isProduct){
 	CONF = {
 		// 游记服务器地址
 		"serverUrl":"http://you.autohome.com.cn",
+		// 发布游记
+		"publishNoteUrl":"http://you.autohome.com.cn/tripnote/pc/publishnote",
 		// 获取游记信息
 		"tripnoteGetUrl":"http://you.autohome.com.cn/tripnote/gettripnotebyidforpc",
 		// 获取草稿
