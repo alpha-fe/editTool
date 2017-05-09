@@ -77,7 +77,7 @@
          描述：编辑工具主页
      -->
     <div class="main" v-if="isReady">
-        <div class="content clearfix">
+        <div class="content clearfix" v-if="isRender">
             <p class="crumbs">
                 <a href="javascript:void(0);">游记首页</a>
                 >写游记
@@ -210,7 +210,7 @@
         </div>
 
         <!-- start -->
-        <yjpicmixtool-component v-if="showYjpicmixtool" @childup="yjpicmixtool"  v-bind:d='yjData.paragraphInfo[0]' ></yjpicmixtool-component>
+        <yjpicmixtool-component v-if="showYjpicmixtool" @childup="yjpicmixtool" v-bind:apiconfig="apiConfig" v-bind:d='yjData.paragraphInfo[0]' ></yjpicmixtool-component>
         <!-- end -->
         <div class="shadow" id="shadow"></div>
     </div>
@@ -265,6 +265,8 @@
 <script type="text/javascript" src="js/component/yjdatepicker.js"></script>
 <script type="text/javascript" src="js/component/yjtextarea.js"></script>
 <script type="text/javascript" src="js/component/yjcatalog.js"></script>
+<script type="text/javascript" src="js/component/yjpicmixtool_content.js"></script>
+<script type="text/javascript" src="js/component/yjpicmixtool_img.js"></script>
 <script type="text/javascript" src="js/component/yjpicmixtool.js"></script>
 <script type="text/javascript" src="js/component/yjtagpopup.js"></script>
 <script type="text/javascript" src="js/component/yjmessagepopup.js"></script>

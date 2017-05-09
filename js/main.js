@@ -4,10 +4,13 @@ var mainVue = new Vue({
     data: {
     	apiConfig : {},
         isReady:false,			// 获取到json数据后设置为true
+        isRender:true,			// 保存图文混排时画面重绘
         showYjpicmixtool:false,	// 每次关闭图文混排都销毁组件
         hasTags: false,			// true:显示修改标签 false:添加标签
         yjData:{},				// 游记数据
-      	enterType:enterType		// 进入类型 0 发表游记 1 编辑 2 续写 3从草稿进入
+      	enterType:enterType	,	// 进入类型 0 发表游记 1 编辑 2 续写 3从草稿进入
+      	intervalObj : null,		// 自动保存
+      	doAutoSave:false,		// 是否启用自动保存
     },
     created: function() {
         self = this;
@@ -107,7 +110,21 @@ var mainVue = new Vue({
     	 * mounted事件中的初始化
     	 */
     	initByMounted:function(){
-    		
+    		var self = this;
+    		document.onkeydown=function(event){
+				var e = event || window.event || arguments.callee.caller.arguments[0];
+	          	if(e && e.keyCode==27){ // 按 Esc 
+	            	return;
+	          	}          
+	          	if(e && e.keyCode==13){ // enter 键
+	            	return;
+	          	}
+	          	
+	          	console.log('自动保存启用');
+	          	self.doAutoSave = true;
+         	}; 
+         	
+         	this.autoSaveNote();
     	},
     	/**
     	 * 页面打开时草稿的校验
@@ -238,6 +255,7 @@ var mainVue = new Vue({
          */
         showDragArticle:function() {
             this.showYjpicmixtool = true;
+            window.console.log(JSON.stringify(this.yjData));
             Vue.nextTick(function() {
                 $(".dragArticle").animate({width: 'toggle'});
             })
@@ -247,15 +265,58 @@ var mainVue = new Vue({
          * @param {Object} r
          */
         yjpicmixtool:function(r){
-            this.showYjpicmixtool = false;
-            if(r.data) // 数据返回时 保存数据
-                this.yjData.paragraphInfo[0] = r.data;
+        	if(r.action == "close"){
+        		this.showYjpicmixtool = false;
+        		Vue.nextTick(function() {
+                	$(".dragArticle").animate({width: 'toggle'});
+            	})
+        		return;
+        	}
+        	this.isRender = false;
+        	if(r.data){
+				this.yjData.paragraphInfo[0] = r.data;
+           }
+            this.isRender = true;
+            
+			this.showYjpicmixtool = false;
+    		Vue.nextTick(function() {
+            	$(".dragArticle").animate({width: 'toggle'});
+        	})
+          
+            window.console.log(JSON.stringify(this.yjData));
         },
         /**
          * 自动保存草稿
          */
         autoSaveNote: function() {
-            console.log('自动保存草稿');
+            
+            var self = this;
+            if(this.intervalObj != null){
+            	return;
+            }
+           
+            this.intervalObj = setInterval(function(){
+            	if(!self.doAutoSave){
+            		return;
+            	}
+            	
+            	console.log('自动保存草稿 执行中');
+            	switch (enterType){
+	            	case 0:	// 新游记
+	            	case 3:	// 草稿
+	            	setInterval
+	            		yjTools.saveLocalDraftByUserId(userId,this.yjData);
+	            		break;
+	            	case 1:	// 编辑
+	            	case 2:	// 续写
+	            		var tripId = queryParams['tripId'];
+	            		yjTools.saveLocalDraftByTripId(userId,tripId,this.yjData);
+	            		break;
+	            	default:
+	            		break;
+            	}
+            },30000)
+            
         },
         /**
          * 手动保存草稿
