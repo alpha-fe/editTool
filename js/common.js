@@ -58,14 +58,14 @@ var utils = {
 	 * 从localstorage取值
 	 * @param {Object} key
 	 */
-	getLocalStorag: function(key) {
+	getLocalStorage: function(key) {
 		var value = localStorage.getItem(key);
 		if(value == null) {
 			return value;
 		}
 
 		try {
-			value = JSON.parse(key);
+			value = JSON.parse(value);
 		} catch(e) {
 			window.console.log(e);
 		}
@@ -147,7 +147,7 @@ var yjTools = {
 	 */
 	getLocalDraftByUserId:function(userId){
 		var key = userId;
-        var draftData = utils.getLocalStorag(key);
+        var draftData = utils.getLocalStorage(key);
         return draftData;
     }, 
     /**
@@ -155,7 +155,7 @@ var yjTools = {
 	 */
     getLocalDraftByTripId:function(userId,tripId){
     	var key = userId+"_"+tripId;
-        var draftData = utils.getLocalStorag(key);
+        var draftData = utils.getLocalStorage(key);
         return draftData;
     },
     /**
@@ -416,4 +416,84 @@ var yjTools = {
    			}
         });
     },
+    /**
+     * 用来比较本地草稿是最新的 还是 服务端 保存的是最新的
+     * @param {Object} draftData
+     * @param {Object} serverData
+     */
+    isDraftLatest:function(draftData,serverData){
+    	if(draftData == null)
+    		return false;
+    		
+    	return true;
+    },
+    /**
+     * 
+     * @param {Object} tripId
+     * @param {Object} userId
+     * @param {Object} enterType
+     */
+    getDraftByEnterType:function(tripId,userId,enterType){
+
+		var draftData = null;
+		switch (enterType){
+			case 0:
+			case 3:
+				draftData = yjTools.getLocalDraftByUserId(userId);
+				break;
+			case 1:
+			case 2:
+				draftData = yjTools.getLocalDraftByTripId(userId,tripId);
+				break;
+			default:
+				break;
+		}
+		return draftData;
+    },
+    /**
+     * 获取默认数据
+     */
+    getBaseData:function(){
+    	return JSON.parse(JSON.stringify(yjBaseData));
+    }
+};
+
+var yjBaseData = {
+  "id": "",
+  "userId": "",
+  "coverInfo": {
+    "coverUrl": "",
+    "title": "",
+    "destination": "",
+    "destinationInfo": "",
+    "perCost": "",
+    "startTime": "",
+    "tagdict": []
+  },
+  "paragraphInfo": [{
+    "id": "",
+    "dayNum": "",
+    "paragraphList": [
+      {
+        "id": "",
+        "journeyTitle": "",
+        "address": "",
+        "addressInfo": "",
+        "startCost": 0,
+        "endCost": 0,
+        "startTime": "",
+        "tagdict": [],
+        "journeyContent": [
+          {
+            "id": "0",
+            "imgurl": "",
+            "content": "",
+            "type": "",
+            "width": "",
+            "height": ""
+          }
+        ]
+      }
+    ]
+  }]
 };
