@@ -431,8 +431,8 @@ var mainVue = new Vue({
         	}
         	this.isRender = false;
         	if(r.data){
-				this.yjData.paragraphInfo[0] = r.data;
-           }
+				Vue.set(this.yjData.paragraphInfo, 0, r.data );
+            }
             this.isRender = true;
             
 			this.showYjpicmixtool = false;

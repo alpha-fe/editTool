@@ -110,7 +110,7 @@
                     <div class="journey" :id="pindex">
 
                         <div class="title-name">
-                            <input type="text" name="" @change="wordsCount(32)" placeholder="给这段旅程加个小标题~" v-model.trim="paragraph.journeyTitle" maxlength="32">
+                            <input type="text" name=""  placeholder="给这段旅程加个小标题~" v-model.trim="paragraph.journeyTitle" maxlength="32">
                             <span class="limit" v-if="paragraph.journeyTitle.length==32" :style="limitStyle">{{paragraph.journeyTitle.length}}/32</span>
                             <span class="limit" v-if="paragraph.journeyTitle.length<32">{{paragraph.journeyTitle.length}}/32</span>
                             <span class="star">*</span>
