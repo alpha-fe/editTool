@@ -633,6 +633,11 @@ input:focus{
                     }
                     a{
                         color: #333;
+                        display: inline-block;
+                        width: 100%;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
                     }
 
                 }

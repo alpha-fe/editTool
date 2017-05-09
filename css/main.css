@@ -528,7 +528,12 @@ input:focus {
             left: -4px;
             background: #999; }
           .content .right .catalog-article .catalog li a {
-            color: #333; }
+            color: #333;
+            display: inline-block;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis; }
         .content .right .catalog-article .catalog li.active {
           color: #F58833; }
       .content .right .catalog-article .dragArticleIcon {
