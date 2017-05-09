@@ -535,7 +535,7 @@ var yjBaseData = {
             "id": "0",
             "imgurl": "",
             "content": "",
-            "type": "",
+            "type": "text",
             "width": "",
             "height": ""
           }
