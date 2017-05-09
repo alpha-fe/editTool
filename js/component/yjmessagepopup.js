@@ -18,11 +18,11 @@ Vue.component('yjmessagepopup-component', {
     '       <img src="img/popupClose.png" class="message-box-close" alt="" @click="close">'+
     '   </div>'+
     '   <div v-if="btnnumber==1" class="message-box-footer">'+
-    '       <a href="javascript:void(0)" style="width:200px">确定</a>'+
+    '       <a href="javascript:void(0)" style="width:200px" @click="close">确定</a>'+
     '   </div>'+
     '   <div v-if="btnnumber==2" class="message-box-footer">'+
-    '       <a href="javascript:void(0)" style="width:160px">确定</a>'+
-    '       <a href="javascript:void(0)" style="width:160px;margin-left: 40px;">取消</a>'+
+    '       <a href="javascript:void(0)" style="width:160px" @click="sure">确定</a>'+
+    '       <a href="javascript:void(0)" style="width:160px;margin-left: 40px;" @click="close">取消</a>'+
     '   </div>'+
     '</div>'+
     '',
@@ -41,7 +41,11 @@ Vue.component('yjmessagepopup-component', {
     methods:{
         close :function(){
             $("html").removeClass("mfixed")
-            $(".message-box").hide();
+            this.$parent.showMessageBox = false;
+        },
+        sure: function(){
+            this.$emit('delback');
+
         }
     }
 })

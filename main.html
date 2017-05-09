@@ -87,8 +87,9 @@
 
                 <div class="head-title">
                     <div class="title-name">
-                        <input type="text" name="" v-model="yjData.coverInfo.title" placeholder="好标题，让你的游记脱颖而出！">
-                        <span class="limit">0/32</span>
+                        <input type="text" name="" v-model="yjData.coverInfo.title" placeholder="好标题，让你的游记脱颖而出！" maxlength="32">
+                        <span class="limit" v-if="yjData.coverInfo.title.length==32" :style="limitStyle">{{yjData.coverInfo.title.length}}/32</span>
+                        <span class="limit" v-if="yjData.coverInfo.title.length<32">{{yjData.coverInfo.title.length}}/32</span>
                         <span class="star">*</span>
                     </div>
                     <yjselect2-component v-bind:suggesturl='apiConfig.suggestUrl' v-bind:dest='yjData.coverInfo.destination' v-bind:destinfo='yjData.coverInfo.destinationInfo' v-bind:params='{"desc":"出发地","placeholder":"请输入出发地",defaultmaxlenth:30}'></yjselect2-component>
@@ -109,8 +110,9 @@
                     <div class="journey" :id="pindex">
 
                         <div class="title-name">
-                            <input type="text" name="" placeholder="给这段旅程加个小标题~" v-model.trim="paragraph.journeyTitle" >
-                            <span class="limit">0/32</span>
+                            <input type="text" name="" @change="wordsCount(32)" placeholder="给这段旅程加个小标题~" v-model.trim="paragraph.journeyTitle" maxlength="32">
+                            <span class="limit" v-if="paragraph.journeyTitle.length==32" :style="limitStyle">{{paragraph.journeyTitle.length}}/32</span>
+                            <span class="limit" v-if="paragraph.journeyTitle.length<32">{{paragraph.journeyTitle.length}}/32</span>
                             <span class="star">*</span>
                         </div>
                         <div class="tags">
@@ -129,11 +131,13 @@
                         <div class="spend clearfix">
                             <div class="fl">
                                 本次行程花费：
-                                <input type="text" placeholder="最低" name="" v-model.trim="paragraph.startCost">
-                                <span class="limit limit_mix">1/30</span>
+                                <input type="text" placeholder="最低" name="" v-model.trim="paragraph.startCost" maxlength="5">
+                                <span v-if="paragraph.startCost.length==5" :style="limitStyle" class="limit limit_mix">{{paragraph.startCost.length}}/5</span>
+                                <span v-if="paragraph.startCost.length<5" class="limit limit_mix">{{paragraph.startCost.length}}/5</span>
                                 <span>至</span>
-                                <input type="text" placeholder="最高" name="" v-model.trim="paragraph.endCost">
-                                <span class="limit limit_max">3/30</span>
+                                <input type="text" placeholder="最高" name="" v-model.trim="paragraph.endCost" maxlength="5">
+                                <span v-if="paragraph.startCost.length==5" :style="limitStyle"  class="limit limit_max">{{paragraph.endCost.length}}/5</span>
+                                <span v-if="paragraph.startCost.length<5" class="limit limit_max">{{paragraph.endCost.length}}/5</span>
 
                             </div>
                             <div class="fl date">
@@ -214,9 +218,8 @@
         <!-- end -->
         <div class="shadow" id="shadow"></div>
     </div>
-    <yjmessagepopup-component btnnumber="1" message="文字居中显示，距两边距离间距到达蓝色">
-
-    </yjmessagepopup-component>
+    <yjmessagepopup-component @delback="delJourneyCallback" :btnnumber="btnNumber" v-if="showMessageBox" :message="resultMessage"></yjmessagepopup-component>
+    <yjmix-content-component @childup="addContentCallback" v-if="showAddContent" v-bind:params="{defaultmaxlenth:2000,title:'添加正文',type:1}"></yjmix-content-component>
 
 </div>
 
@@ -270,46 +273,11 @@
 <script type="text/javascript" src="js/component/yjpicmixtool.js"></script>
 <script type="text/javascript" src="js/component/yjtagpopup.js"></script>
 <script type="text/javascript" src="js/component/yjmessagepopup.js"></script>
+<script type="text/javascript" src="js/component/yjpicmixtool_content.js"></script>
 
 
 <script type="text/javascript" src="js/init.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
-<div class="dragArticle-add-content">
-    <div class="head">
-        添加正文
-        <img src="img/popupClose.png" alt="" class="close">
-    </div>
-    <div class="content">
-        <textarea name="" id="" cols="30" rows="10" placeholder="分享你的旅行故事"></textarea>
-        <span>23/2000</span>
-    </div>
-    <div class="foot">
-        <span>保存</span>
-    </div>
-</div>
-<div class="dragArticle-add-caption">
-    <div class="head">
-        添加图注
-        <img src="img/popupClose.png" alt="" class="close">
-    </div>
-    <div class="content clearfix">
-        <div class="image fl">
-            <img src="http://img2.autoimg.cn/travelplat/g10/M07/42/DC/wKjBzVjaEaiAOJ9rAAChduceFY0757.jpg">
-            <div class="rotate"></div>
-            <div class="rotate-text">
-                <img src="img/rotateIcon.png" alt="">
-                <span>旋转90°</span>
-            </div>
-        </div>
-        <div class="describe fl">
-            <textarea placeholder="为图片添加描述~"></textarea>
-            <p class="limit">8/140</p>
-        </div>
-    </div>
-    <div class="foot">
-        <span>保存</span>
-    </div>
-</div>
 
 </body>
 

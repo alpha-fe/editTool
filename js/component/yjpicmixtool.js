@@ -176,6 +176,7 @@ Vue.component('yjpicmixtool-component', {
 			};	
 			this.data.paragraphList[this.tabSelected].journeyContent.push(contentObj);
 			this.showAddContent = false;
+            $("html").addClass("mfixed");
 		},
 		/**
 		 * 添加正文

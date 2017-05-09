@@ -79,6 +79,7 @@ Vue.component('yjmix-content-component', {
 		closePupop:function(){
 			$(this.$el).hide();
 			this.$emit('childup', { action:"close"});
+			$("html").removeClass("mfixed");
 		},
 		/**
 		 * 保存
@@ -86,6 +87,7 @@ Vue.component('yjmix-content-component', {
 		saveContent:function(){
 			$(this.$el).hide();
 			this.$emit('childup', { type:this.type,  action:"save", content: this.message, index:this.index});
+            $("html").removeClass("mfixed");
 		},
 		/**
 		 * 获得焦点

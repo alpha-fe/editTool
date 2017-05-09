@@ -11,6 +11,14 @@ var mainVue = new Vue({
       	enterType:enterType	,	// 进入类型 0 发表游记 1 编辑 2 续写 3从草稿进入
       	intervalObj : null,		// 自动保存
       	doAutoSave:false,		// 是否启用自动保存
+        showAddContent:false,	// 添加正文
+        showMessageBox:false,   //结果弹框
+        pIndex:0,               //当前操作对应的行程索引
+        resultMessage:"",
+        btnNumber:1,
+        limitStyle: {
+            color: '#FD5554'
+        }
     },
     created: function() {
         self = this;
@@ -133,14 +141,34 @@ var mainVue = new Vue({
 
     	},
         /**
-         * 添加行程
+         * 添加行程，校验标题是否填写，人均花费如果填写是否正确
          */
         addJourney:function(pindex){
             // todo：未完成
             // todo:check
             // check不过 返回
             var isOk = true;
+            var checkData = this.yjData.paragraphInfo[0].paragraphList;
+            for(var i=0;i<checkData.length;i++){
+                var journeyTitle = checkData[i].journeyTitle;
+                var startCost = checkData[i].startCost;
+                var endCost = checkData[i].endCost;
+                if(!journeyTitle){
+                    isOk = false;
+                    var number = i+1;
+                    this.resultMessage ="行程"+number+"尚未添加行程标题"
+                    break;
+                }
+                if(parseInt(startCost) > parseInt(endCost)){
+                    isOk = false;
+                    this.resultMessage = journeyTitle+"人均最低花费不能高于人均最高花费，快去修改";
+                    break;
+                }
+            }
             if(!isOk){
+                this.btnNumber = 1;
+                this.showMessageBox = true;
+                $("html").addClass("mfixed");
                 return;
             }
 
@@ -178,22 +206,48 @@ var mainVue = new Vue({
          * 删除行程
          */
         delJourney:function(pindex){
-            this.yjData.paragraphInfo[0].paragraphList.splice(pindex,1);
+            this.pIndex = pindex;
+            this.resultMessage = "是否删除此行程";
+            this.showMessageBox = true;
+            this.btnNumber = 2;
+            $("html").addClass("mfixed");
+        },
+        delJourneyCallback:function(){
+            this.yjData.paragraphInfo[0].paragraphList.splice(this.pIndex,1);
+            this.showMessageBox = false;
+            $("html").removeClass("mfixed");
         },
         /**
          * 添加正文
          */
         addContent:function(index){
+            this.showAddContent = true;
+            $("html").addClass("mfixed");
+            this.pIndex = index;
+        },
+        /**
+         * 保存正文
+         * @param {Object} r
+         */
+        addContentCallback:function(r){
+            if(r.action == "close"){
+                this.showAddContent = false;
+                return;
+            }
+            var index = this.pIndex;
             var content = {
-                id: "",
-                imgurl: "",
-                content: "",
-                type: "text",
-                width: "750",
-                height: "500"
+                "id": "",
+                "imgurl": "",
+                "content": r.content,
+                "type": "text",
+                "width": "",
+                "height": ""
             };
             this.yjData.paragraphInfo[0].paragraphList[index].journeyContent.push(content);
+            this.showAddContent = false;
+
         },
+
         /**
          * 上传图片后的回掉
          * @param {Object} r
@@ -346,7 +400,7 @@ var mainVue = new Vue({
            	window.removeEventListener("beforeunload", checkLeavePage);
            	window.removeEventListener("unload", checkLeavePage);
            	$("html").addClass("mfixed")
-            $(".message-box").show();
+            this.showMessageBox = true;
             console.log('发布');
         }
     }

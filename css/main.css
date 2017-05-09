@@ -887,8 +887,7 @@ input:focus {
       position: absolute;
       top: inherit;
       right: 7px;
-      font-size: 12px;
-      color: #FD5554; }
+      font-size: 12px; }
   .journey .journey-content {
     position: relative; }
     .journey .journey-content > img {
@@ -950,8 +949,7 @@ input:focus {
         position: absolute;
         top: 152px;
         right: 0px;
-        font-size: 12px;
-        color: #999; }
+        font-size: 12px; }
     .journey .content-image textarea {
       width: 100%; }
 
@@ -1143,7 +1141,6 @@ input:focus {
     text-indent: 10px; }
 
 .dragArticle-add-content {
-  display: none;
   width: 902px;
   height: 520px;
   position: fixed;
@@ -1302,7 +1299,6 @@ input:focus {
         cursor: pointer; }
 
 .message-box {
-  display: none;
   width: 440px;
   height: 300px;
   box-shadow: 0 0 10px #CCC, 0 0px 10px #ccc;

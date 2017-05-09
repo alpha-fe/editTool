@@ -20,7 +20,8 @@ Vue.component('yjtextarea-component', {
 	template: ''+
 		'<div :class="params.css">'+
 		'	<textarea v-on:focus="focus" v-on:blur="blur" v-model="message" :placeholder="params.placeholder"></textarea>'+
-		'	<p class="limit">{{currentLength}}/{{maxLength}}</p>'+
+		'	<p v-if="currentLength==maxLength" class="limit full">{{currentLength}}/{{maxLength}}</p>'+
+    	'	<p v-else class="limit">{{currentLength}}/{{maxLength}}</p>'+
 		'</div>',
 	data: function() {
 		return {
