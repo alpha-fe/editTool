@@ -1,4 +1,21 @@
 var utils = {
+
+	/**
+	 * 封面图正在上传当中，请稍后!
+	 */
+    COVER_UPLOADING_MSG:"封面图正在上传当中，请稍后!",
+    /**
+     * 保存草稿失败，请稍后再试!
+     */
+    SAVE_FAIL:"保存草稿失败，请稍后再试!",
+    /**
+     * 预览失败，请稍后再试!
+     */
+    PREVER_FAIL:"预览失败，请稍后再试!",
+    /**
+     * 发布失败，请稍后再试!
+     */
+    PUBLISH_FAIL:"发布失败，请稍后再试!",
 	/**
 	 * 上传图片类型种类
 	 */
@@ -58,14 +75,14 @@ var utils = {
 	 * 从localstorage取值
 	 * @param {Object} key
 	 */
-	getLocalStorag: function(key) {
+	getLocalStorage: function(key) {
 		var value = localStorage.getItem(key);
 		if(value == null) {
 			return value;
 		}
 
 		try {
-			value = JSON.parse(key);
+			value = JSON.parse(value);
 		} catch(e) {
 			window.console.log(e);
 		}
@@ -147,7 +164,7 @@ var yjTools = {
 	 */
 	getLocalDraftByUserId:function(userId){
 		var key = userId;
-        var draftData = utils.getLocalStorag(key);
+        var draftData = utils.getLocalStorage(key);
         return draftData;
     }, 
     /**
@@ -155,7 +172,7 @@ var yjTools = {
 	 */
     getLocalDraftByTripId:function(userId,tripId){
     	var key = userId+"_"+tripId;
-        var draftData = utils.getLocalStorag(key);
+        var draftData = utils.getLocalStorage(key);
         return draftData;
     },
     /**
@@ -192,7 +209,7 @@ var yjTools = {
      * 获取已发布游记
      * @param {Object} travelId
      */
-    getTravelById: function (travelId,scallback) {
+    getTravelById: function (travelId,scallback,ecallback) {
         if (typeof travelId == "undefined" || travelId == "") {
             return;
         }
@@ -210,7 +227,9 @@ var yjTools = {
             	}
             },
             error: function (a, b) {
-                console.log(a);
+            	if(ecallback){
+            		ecallback(a,b);
+            	}
             }
         });
         return result;
@@ -219,7 +238,7 @@ var yjTools = {
      * 获取远程草稿
      * @param {Object} tripId
      */
-    getNewDraftTravelNote: function (tripId,scallback) {
+    getNewDraftTravelNote: function (tripId,scallback,ecallback) {
         if (typeof tripId == "undefined" || tripId == "") {
             return;
         }
@@ -238,8 +257,9 @@ var yjTools = {
             	}
             },
             error: function (a, b) {
-                console.log(a);
-                //return ""
+            	if(ecallback){
+            		ecallback(a,b);
+            	}
             }
         });
         return result;
@@ -247,7 +267,7 @@ var yjTools = {
     /**
      * 保存草稿至服务端
      */
-    saveDraftToServer:function(draftData,scallback) {
+    saveDraftToServer:function(draftData,scallback,ecallback) {
         var jsonData = JSON.stringify(draftData);
         $.ajax({
             url: CONF.draftSaveUrl,
@@ -262,6 +282,33 @@ var yjTools = {
             	}
             },
             error: function (a, b) {
+            	if(ecallback){
+            		ecallback(a,b);
+            	}
+            }
+        });
+    },
+     /**
+     * 发布游记至服务端
+     */
+    publishNoteToServer:function(noteData,scallback,ecallback) {
+        var jsonData = JSON.stringify(noteData);
+        $.ajax({
+            url: CONF.publishNoteUrl,
+            dataType: "json",
+            type: "post",
+            async:"true",
+            contenttype: "application/javascript;charset=utf-8",
+            data: { jsonData: $.toJSON(jsonData) },
+            success: function (data) {
+				if(scallback){
+            		scallback(data);
+            	}
+            },
+            error: function (a, b) {
+            	if(ecallback){
+            		ecallback(a,b);
+            	}
             }
         });
     },
@@ -416,4 +463,84 @@ var yjTools = {
    			}
         });
     },
+    /**
+     * 用来比较本地草稿是最新的 还是 服务端 保存的是最新的
+     * @param {Object} draftData
+     * @param {Object} serverData
+     */
+    isDraftLatest:function(draftData,serverData){
+    	if(draftData == null)
+    		return false;
+    		
+    	return true;
+    },
+    /**
+     * 
+     * @param {Object} tripId
+     * @param {Object} userId
+     * @param {Object} enterType
+     */
+    getDraftByEnterType:function(tripId,userId,enterType){
+
+		var draftData = null;
+		switch (enterType){
+			case 0:
+			case 3:
+				draftData = yjTools.getLocalDraftByUserId(userId);
+				break;
+			case 1:
+			case 2:
+				draftData = yjTools.getLocalDraftByTripId(userId,tripId);
+				break;
+			default:
+				break;
+		}
+		return draftData;
+    },
+    /**
+     * 获取默认数据
+     */
+    getBaseData:function(){
+    	return JSON.parse(JSON.stringify(yjBaseData));
+    }
+};
+
+var yjBaseData = {
+  "id": "",
+  "userId": "",
+  "coverInfo": {
+    "coverUrl": "",
+    "title": "",
+    "destination": "",
+    "destinationInfo": "",
+    "perCost": "",
+    "startTime": "",
+    "tagdict": []
+  },
+  "paragraphInfo": [{
+    "id": "",
+    "dayNum": "",
+    "paragraphList": [
+      {
+        "id": "",
+        "journeyTitle": "",
+        "address": "",
+        "addressInfo": "",
+        "startCost": 0,
+        "endCost": 0,
+        "startTime": "",
+        "tagdict": [],
+        "journeyContent": [
+          {
+            "id": "0",
+            "imgurl": "",
+            "content": "",
+            "type": "text",
+            "width": "",
+            "height": ""
+          }
+        ]
+      }
+    ]
+  }]
 };

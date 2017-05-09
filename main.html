@@ -208,7 +208,7 @@
             </div>
         </div>
         <div class="edit-footer">
-            <a v-if="enterType != 1 && enterType !=2" href="javascript:void(0);">保存草稿</a>
+            <a v-if="enterType != 1 && enterType !=2" @click="manualSaveNote" href="javascript:void(0);">保存草稿</a>
             <a v-if="enterType != 1 && enterType !=2" href="javascript:void(0);">预览</a>
             <a href="javascript:void(0);" @click="publish()">发布游记</a>
         </div>
@@ -275,8 +275,6 @@
 <script type="text/javascript" src="js/component/yjmessagepopup.js"></script>
 <script type="text/javascript" src="js/component/yjpicmixtool_content.js"></script>
 
-
-<script type="text/javascript" src="js/init.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 
 </body>
