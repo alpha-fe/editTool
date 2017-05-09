@@ -69,33 +69,15 @@ Vue.component('yjpicmixtool-component', {
 			showEditComment:false,	// 修改图注
 			showAddCommentObj:"",	// 添加图注的对象
 			tabSelected: 0, // 选中的行程tabindex
-			tabJourneyOpRecord: [], // 操作日志，用于保存
-			tabJourneySorted: [], // 所有行程的正文图片的排序
-			tabJourneyDel: [], // 所有行程的正文图片的删除index
-			data: null,
-			baseData: null
+			data: null
 		}
 	},
 	/**
 	 * 初始化控件
 	 */
 	created: function() {
-		console.log("created mixtool");
-
-		window.console.log("d:" + JSON.stringify(this.d));
-
 		var jsonData = JSON.stringify(this.d);
 		this.data = JSON.parse(jsonData); // 通过此方式进行深拷贝
-		this.baseData = JSON.parse(jsonData); // 通过此方式进行深拷贝
-
-		if(this.tabJourneySorted.length == 0) {
-			for(var i = 0; i < this.data.paragraphList.length; i++) {
-				this.tabJourneyOpRecord.push([]);
-				this.tabJourneySorted.push([]);
-				this.tabJourneyDel.push([]);
-			}
-		}
-
 	},
 	destroyed: function() {
 		console.log("destroyed mixtool");
@@ -297,7 +279,6 @@ Vue.component('yjpicmixtool-component', {
 		addImg: function(event) {
 			var $uploadinput = $(event.target).parents('ul').find('input');
 			$uploadinput.click();
-	
 		},
 		
 		/**
@@ -353,6 +334,5 @@ Vue.component('yjpicmixtool-component', {
 				return 0;
 			});
 		}
-
 	}
 })
